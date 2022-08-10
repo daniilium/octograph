@@ -5,7 +5,7 @@ export const grayColor = '#79828b';
 export const redColor = '#CA3737';
 
 export const Text = styled.p`
-  font-family: 'Lucida Grande', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 18px;
   font-weight: 400;
   line-height: 28px;
@@ -21,7 +21,7 @@ export const Header = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-family: 'Lucida Grande', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 32px;
@@ -30,10 +30,15 @@ export const Title = styled.h2`
 `;
 
 export const Subtitle = styled.h3`
-  font-family: 'Lucida Grande', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 21px;
   color: ${grayColor};
+`;
+
+export const Link = styled.a`
+  color: ${grayColor};
+  text-decoration: underline;
 `;
