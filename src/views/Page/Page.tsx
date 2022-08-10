@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { PageObject } from '../../../services/Interfaces';
-import { getPage } from '../../../services/page';
+import { PageObject } from '../../helpers/interfaces';
+import { getPage } from '../../services/page';
 
 export function Page() {
   const pathPage = useParams().id;
