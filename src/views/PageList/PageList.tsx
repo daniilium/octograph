@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PageObject } from '../../services/Interfaces';
 
+import { Header, Title, Subtitle } from '../../css-in-js/global';
+import { PageObject } from '../../helpers/interfaces';
 import { getPageList } from '../../services/page';
 
-export const PagesList = () => {
+export const PageList = () => {
   const [pages, setPages] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
 
@@ -20,7 +21,11 @@ export const PagesList = () => {
 
   return (
     <>
-      <h1>Pages ({totalCount})</h1>
+      <Header>
+        <Title>Статьи ({totalCount})</Title>
+        <Subtitle>ваши статьи</Subtitle>
+      </Header>
+
       <ul>
         {pages.map((page: PageObject, index) => {
           return (
