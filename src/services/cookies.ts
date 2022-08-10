@@ -1,13 +1,24 @@
 import cookies from 'browser-cookies';
+import { getAccountByToken } from './account';
 
-export const isAuthorized = () => {
-  return Boolean(cookies.get('token'));
+export async function validateToken() {
+  const token = getToken();
+  if (!token) return false;
+
+  const user = await getAccountByToken(token);
+  if (!user.ok) return false;
+  return true;
+}
+
+export const existToken = () => {
+  const token = getToken();
+  return Boolean(token);
 };
 
 export const getToken = () => {
   const token = cookies.get('token');
   if (token) return decrypto(token);
-  else console.log('No token');
+  else return null;
 };
 
 export const setToken = (token: string) => {
