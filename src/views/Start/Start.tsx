@@ -1,87 +1,37 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useGlobalContext } from '../../components/Layout/Layout';
 
-import { Header, Title, Subtitle, grayColor, redColor } from '../../css-in-js/global';
-import { getAccountByToken } from '../../services/account';
-import { ErrorMessage } from '../../services/Interfaces';
+import { Header, Title, Subtitle, Link } from '../../css-in-js/global';
+import { createAccount, getAccountByToken } from '../../services/account';
+import { ErrorMessage } from '../../helpers/interfaces';
+import {
+  Button,
+  EmptySpace,
+  ErrorPin,
+  FormStyle,
+  InformationPin,
+  InputContainer,
+  InputStyle,
+  PinContainer,
+} from './start.style';
 
-const InputStyle = styled.input`
-  font-family: 'Lucida Grande', sans-serif;
-  font-size: 18px;
-  padding-left: 16px;
-  width: 100%;
-  height: 37px;
-  border: 1px solid #333333;
-  border-radius: 18px;
-  color: ${grayColor};
-`;
-
-const Button = styled.button`
-  margin-top: 16px;
-  cursor: pointer;
-  font-family: 'Lucida Grande', sans-serif;
-  font-size: 18px;
-  padding: 8px 16px;
-  background-color: white;
-  border: 2px solid #333333;
-  border-radius: 18px;
-  text-transform: uppercase;
-`;
-
-const Link = styled.a`
-  font-family: 'Lucida Grande', sans-serif;
-  color: ${grayColor};
-`;
-
-const FormStyle = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 64px;
-`;
-
-const InputContainer = styled.div`
-  width: 100%;
-`;
-
-const EmptySpace = styled.div`
-  height: 100%;
-`;
-
-const InformationPin = styled.p`
-  font-family: 'Lucida Grande';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 19px;
-  color: ${grayColor};
-
-  &:before {
-    content: '•';
-    margin-right: 4px;
-  }
-`;
-
-const ErrorPin = styled(InformationPin)`
-  color: ${redColor};
-`;
-
-const PinContainer = styled.div`
-  margin-top: 6px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-`;
+type FormData =
+  | {
+      token: string;
+    }
+  | {
+      short_name: string;
+    };
 
 type Props = {
   status: 'login' | 'signup';
 };
 
 export const Start = (props: Props) => {
+  const { setGlobalStore } = useGlobalContext();
+
   const [isStatus, setStatus] = useState(props.status);
   const navigate = useNavigate();
   const id = useParams().id;
@@ -92,17 +42,23 @@ export const Start = (props: Props) => {
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm();
+  } = useForm<FormData>();
 
   useEffect(() => {
     if (id) onSubmit({ token: id });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  const onSubmit = async (data: any) => {
-    if (data?.token) {
-      const account = await getAccountByToken(data.token);
-      if (account.ok) navigate('/account');
+  const onSubmit = async (data: FormData) => {
+    if ('token' in data) {
+      const { token } = data;
+      const account = await getAccountByToken(token);
+
+      if (account.ok) {
+        setGlobalStore({ isAuth: true });
+        navigate('/profile');
+      }
+
       if (!account.ok) {
         const error = (account as ErrorMessage).error;
         if (error === 'ACCESS_TOKEN_INVALID')
@@ -111,9 +67,18 @@ export const Start = (props: Props) => {
       }
     }
 
-    if (data['short_name']) {
-      setError('short_name', { type: 'async', message: 'async error' });
-      // console.log('name', data['short_name']);
+    if ('short_name' in data) {
+      const { short_name } = data;
+      const account = await createAccount(short_name);
+
+      if (account.ok) {
+        setGlobalStore({ isAuth: true });
+        navigate('/profile');
+      }
+
+      if (!account.ok) {
+        setError('short_name', { type: 'async', message: 'async error' });
+      }
     }
   };
 
@@ -144,18 +109,21 @@ export const Start = (props: Props) => {
               placeholder="Введите ваш токен..."
               {...register('token', { required: true })}
             />
-            {(errors.token?.type === 'required' && (
+
+            {('token' in errors && errors.token?.type === 'required' && (
               <ErrorPin>поле не может быть пустым</ErrorPin>
             )) ||
-              (errors.token?.type === 'async' && <ErrorPin>ошибка на стороне сервера</ErrorPin>) ||
-              (errors.token?.type === 'invalid_token' && <ErrorPin>неверный токен</ErrorPin>)}
+              ('token' in errors && errors.token?.type === 'invalid_token' && (
+                <ErrorPin>неверный токен</ErrorPin>
+              )) ||
+              ('token' in errors && errors.token?.type === 'async' && (
+                <ErrorPin>ошибка на стороне сервера</ErrorPin>
+              ))}
           </InputContainer>
 
           <Button>Войти</Button>
 
-          <Link onClick={changeStatus} href="">
-            или зарегистрироваться
-          </Link>
+          <Link onClick={changeStatus}>или зарегистрироваться</Link>
         </FormStyle>
       )}
 
@@ -170,16 +138,16 @@ export const Start = (props: Props) => {
             <PinContainer>
               <InformationPin>потом можно изменить</InformationPin>
 
-              {(errors.short_name?.type === 'minLength' && (
+              {('short_name' in errors && errors.short_name?.type === 'minLength' && (
                 <ErrorPin>минимум 2 символа</ErrorPin>
               )) ||
-                (errors.short_name?.type === 'required' && (
+                ('short_name' in errors && errors.short_name?.type === 'required' && (
                   <ErrorPin>поле не может быть пустым</ErrorPin>
                 )) ||
-                (errors.short_name?.type === 'maxLength' && (
+                ('short_name' in errors && errors.short_name?.type === 'maxLength' && (
                   <ErrorPin>максимум 32 символа</ErrorPin>
                 )) ||
-                (errors.short_name?.type === 'async' && (
+                ('short_name' in errors && errors.short_name?.type === 'async' && (
                   <ErrorPin>ошибка на стороне сервера</ErrorPin>
                 ))}
             </PinContainer>
@@ -187,9 +155,7 @@ export const Start = (props: Props) => {
 
           <Button>зарегистрироваться</Button>
 
-          <Link onClick={changeStatus} href="">
-            или войти
-          </Link>
+          <Link onClick={changeStatus}>или войти</Link>
         </FormStyle>
       )}
     </>
