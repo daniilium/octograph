@@ -1,6 +1,6 @@
-import { API_URL } from './сonstants';
+import { API_URL } from '../helpers/constants';
 import { getToken, setToken } from './cookies';
-import { CreateAccount, AccountInfo, ErrorMessage } from './Interfaces';
+import { CreateAccount, AccountInfo, ErrorMessage } from '../helpers/interfaces';
 
 export const createAccount = async (shortName: string) => {
   const response = await fetch(`${API_URL}/createAccount?short_name=${shortName}`, {
@@ -9,7 +9,7 @@ export const createAccount = async (shortName: string) => {
       Accept: 'application/json',
     },
   });
-  const json: CreateAccount = await response.json();
+  const json: CreateAccount | ErrorMessage = await response.json();
 
   if (json.ok) setToken(json.result.access_token);
 
