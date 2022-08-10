@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { grayColor } from '../../css-in-js/global';
-import { isAuthorized } from '../../services/cookies';
 
 const NavStyled = styled.nav`
   width: 100%;
@@ -22,18 +21,26 @@ const NavLink = styled(Link)`
   // text-decoration: none;
 `;
 
-export const Nav = () => {
+type NavProps = {
+  isAuth: boolean;
+};
+
+export const Nav = (props: NavProps) => {
+  const { isAuth } = props;
+
   return (
     <NavStyled>
-      <NavLink to="/">Home</NavLink>
+      <NavLink to="/">Главная</NavLink>
 
-      {isAuthorized() ? (
+      {isAuth ? (
         <>
-          <NavLink to="/pages">Pages</NavLink>
-          <NavLink to="/profile">Profile</NavLink>
+          <NavLink to="/pages">Статьи</NavLink>
+          <NavLink to="/profile">Профиль</NavLink>
+          <NavLink to="/logout">Выйти</NavLink>
+
         </>
       ) : (
-        <NavLink to="/authorization">Login / Signup</NavLink>
+        <NavLink to="/start">Старт</NavLink>
       )}
     </NavStyled>
   );
