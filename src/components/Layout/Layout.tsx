@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Outlet, useOutletContext } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { existToken } from '../../services/cookies';
+import { existToken } from '../../services/token';
 
 import { Nav } from '../Nav/Nav';
 

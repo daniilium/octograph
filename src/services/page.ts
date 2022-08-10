@@ -1,5 +1,5 @@
 import { API_URL } from '../helpers/constants';
-import { getToken } from './cookies';
+import { getToken } from './token';
 
 export const getPageList = async (offset = 0, limit = 20) => {
   const token = getToken();

@@ -1,5 +1,5 @@
 import { API_URL } from '../helpers/constants';
-import { getToken, setToken } from './cookies';
+import { getToken, setToken } from './token';
 import { CreateAccount, AccountInfo, ErrorMessage } from '../helpers/interfaces';
 
 export const createAccount = async (shortName: string) => {
