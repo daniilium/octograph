@@ -16,7 +16,7 @@ export const Button = styled.button`
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
-  padding: 8px 16px;
+  padding: 8px 16px 6px 16px;
   background-color: white;
   border: 2px solid #333333;
   border-radius: 18px;
