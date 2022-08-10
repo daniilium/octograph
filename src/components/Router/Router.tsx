@@ -1,18 +1,15 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { About } from '../../views/About/About';
 import { Home } from '../../views/Home/Home';
-import { Page404 } from '../../views/Page404/Page404';
-import { PagesList } from '../../views/PageList/PageList';
+import { Page404 } from '../../views/404page/404page';
+import { PageList } from '../../views/PageList/PageList';
 import { Profile } from '../../views/Profile/Profile';
 import { Layout } from '../Layout/Layout';
-import { Authorization } from '../../views/Authorization/Authorization';
-import { isAuthorized as checkAuth } from '../../services/cookies';
-import { Page } from '../../views/PageList/Page/Page';
+import { Page } from '../../views/Page/Page';
 import { Start } from '../../views/Start/Start';
-
-const isAuthorized = (component: JSX.Element) =>
-  checkAuth() ? component : <Navigate to="/authorization" />;
+import { Logout } from '../Logout/Logout';
+import { ProtectedRoute } from './ProtectedRoute';
 
 export function Router() {
   return (
@@ -22,23 +19,49 @@ export function Router() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
 
-            <Route path="profile" element={isAuthorized(<Profile />)} />
+            <Route
+              path="profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
 
-            <Route path="pages" element={isAuthorized(<PagesList />)} />
+            <Route
+              path="pages"
+              element={
+                <ProtectedRoute>
+                  <PageList />
+                </ProtectedRoute>
+              }
+            />
 
-            <Route path="page" element={isAuthorized(<Page />)}>
-              <Route path=":id" element={isAuthorized(<Page />)} />
+            <Route
+              path="page"
+              element={
+                <ProtectedRoute>
+                  <Page />
+                </ProtectedRoute>
+              }
+            >
+              <Route
+                path=":id"
+                element={
+                  <ProtectedRoute>
+                    <Page />
+                  </ProtectedRoute>
+                }
+              />
             </Route>
 
             <Route path="about" element={<About />} />
 
-            <Route
-              path="authorization"
-              element={checkAuth() ? <Navigate to="/" /> : <Authorization />}
-            />
             <Route path="start" element={<Start status="login" />}>
               <Route path=":id" element={<Start status="login" />} />
             </Route>
+
+            <Route path="logout" element={<Logout />} />
 
             <Route path="*" element={<Page404 />} />
           </Route>
