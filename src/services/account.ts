@@ -40,3 +40,57 @@ export const getAccount = async (): Promise<AccountInfo | ErrorMessage> => {
   if (!token) return { ok: false, error: 'No token' };
   return getAccountByToken(token);
 };
+
+export const changeShortNameAccount = async (shortName: string) => {
+  const token = getToken();
+
+  if (!token) return { ok: false, error: 'No token' };
+  const response = await fetch(
+    `${API_URL}/editAccountInfo?access_token=${token}&short_name=${shortName}`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    }
+  );
+
+  const json = await response.json();
+  return json;
+};
+
+export const changeAuthorNameAccount = async (authorName: string) => {
+  const token = getToken();
+
+  if (!token) return { ok: false, error: 'No token' };
+  const response = await fetch(
+    `${API_URL}/editAccountInfo?access_token=${token}&author_name=${authorName}`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    }
+  );
+
+  const json = await response.json();
+  return json;
+};
+
+export const changeAuthorUrlAccount = async (authorUrl: string) => {
+  const token = getToken();
+
+  if (!token) return { ok: false, error: 'No token' };
+  const response = await fetch(
+    `${API_URL}/editAccountInfo?access_token=${token}&author_url=${authorUrl}`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    }
+  );
+
+  const json = await response.json();
+  return json;
+};
