@@ -1,9 +1,9 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGlobalContext } from '../../components/Layout/Layout';
 
-import { Header, Title, Subtitle, Link } from '../../css-in-js/global';
+import { useGlobalContext } from '../../components/Layout/Layout';
+import { Header, Title, Subtitle, Link, InputStyle } from '../../css-in-js/global';
 import { createAccount, getAccountByToken } from '../../services/account';
 import { ErrorMessage } from '../../helpers/interfaces';
 import {
@@ -13,7 +13,6 @@ import {
   FormStyle,
   InformationPin,
   InputContainer,
-  InputStyle,
   PinContainer,
 } from './start.style';
 
@@ -105,7 +104,7 @@ export const Start = (props: Props) => {
         <FormStyle onSubmit={handleSubmit(onSubmit)}>
           <InputContainer>
             <InputStyle
-              type="text"
+              type="password"
               placeholder="Введите ваш токен..."
               {...register('token', { required: true })}
             />

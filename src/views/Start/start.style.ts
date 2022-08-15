@@ -1,15 +1,5 @@
 import styled from 'styled-components';
-import { grayColor, redColor } from '../../css-in-js/global';
-
-export const InputStyle = styled.input`
-  font-size: 18px;
-  padding-left: 16px;
-  width: 100%;
-  height: 37px;
-  border: 1px solid #333333;
-  border-radius: 18px;
-  color: ${grayColor};
-`;
+import { blackColor, grayColor, redColor } from '../../css-in-js/global';
 
 export const Button = styled.button`
   margin-top: 16px;
@@ -18,7 +8,7 @@ export const Button = styled.button`
   font-size: 18px;
   padding: 8px 16px 6px 16px;
   background-color: white;
-  border: 2px solid #333333;
+  border: 2px solid ${blackColor};
   border-radius: 18px;
   text-transform: uppercase;
 `;

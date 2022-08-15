@@ -42,3 +42,14 @@ export const Link = styled.a`
   color: ${grayColor};
   text-decoration: underline;
 `;
+
+export const InputStyle = styled.input`
+  font-family: 'EB Garamond', serif;
+  font-size: 18px;
+  padding-left: 16px;
+  width: 100%;
+  height: 37px;
+  border: 1px solid ${blackColor};
+  border-radius: 18px;
+  color: ${blackColor};
+`;
