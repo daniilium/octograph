@@ -31,6 +31,8 @@ export const EmptySpace = styled.div`
 `;
 
 export const InformationPin = styled.p`
+  position: relative;
+  padding-left: 12px;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -38,8 +40,10 @@ export const InformationPin = styled.p`
   color: ${grayColor};
 
   &:before {
+    position: absolute;
+    top: 3px;
+    left: 0px;
     content: '•';
-    margin-right: 4px;
   }
 `;
 
@@ -48,7 +52,6 @@ export const ErrorPin = styled(InformationPin)`
 `;
 
 export const PinContainer = styled.div`
-  margin-top: 6px;
   display: flex;
   flex-direction: column;
   gap: 2px;
