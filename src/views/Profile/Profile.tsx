@@ -95,8 +95,6 @@ export const Profile = () => {
     }
   };
 
-  console.log(userInfo);
-
   return (
     <>
       <Header>
@@ -111,7 +109,7 @@ export const Profile = () => {
               <InputStyle
                 type="text"
                 defaultValue={userInfo?.short_name}
-                {...register('short_name', { required: true, minLength: 3, maxLength: 20 })}
+                {...register('short_name', { required: true, minLength: 1, maxLength: 32 })}
               />
               <Button>
                 <IconApprove />
@@ -133,10 +131,10 @@ export const Profile = () => {
               <ErrorPin>поле должно быть заполнено</ErrorPin>
             )}
             {errors.short_name?.type === 'minLength' && (
-              <ErrorPin>минимальная длина 3 символа</ErrorPin>
+              <ErrorPin>минимальная длина 1 символ</ErrorPin>
             )}
             {errors.short_name?.type === 'maxLength' && (
-              <ErrorPin>максимальная длина 20 символов</ErrorPin>
+              <ErrorPin>максимальная длина 32 символа</ErrorPin>
             )}
             <InformationPin>видно только тебе</InformationPin>
           </PinContainer>
@@ -148,7 +146,7 @@ export const Profile = () => {
               <InputStyle
                 type="text"
                 defaultValue={userInfo?.author_name}
-                {...register('author_name', { minLength: 3, maxLength: 20 })}
+                {...register('author_name', { maxLength: 128 })}
               />
               <Button>
                 <IconApprove />
@@ -167,11 +165,8 @@ export const Profile = () => {
 
           <PinContainer>
             {errors.author_name?.type === 'server_error' && <ErrorPin>ошибка сервера</ErrorPin>}
-            {errors.author_name?.type === 'minLength' && (
-              <ErrorPin>минимальная длина 3 символа</ErrorPin>
-            )}
             {errors.author_name?.type === 'maxLength' && (
-              <ErrorPin>максимальная длина 20 символов</ErrorPin>
+              <ErrorPin>максимальная длина 128 символов</ErrorPin>
             )}
             <InformationPin>может быть пустым</InformationPin>
             <InformationPin>видно под заголовком статьи</InformationPin>
@@ -185,7 +180,7 @@ export const Profile = () => {
               <InputStyle
                 type="text"
                 defaultValue={userInfo?.author_url}
-                {...register('author_url', { minLength: 3, maxLength: 20 })}
+                {...register('author_url', { maxLength: 512 })}
               />
               <Button>
                 <IconApprove />
@@ -205,24 +200,27 @@ export const Profile = () => {
           <PinContainer>
             {errors.author_url?.type === 'server_error' && <ErrorPin>ошибка сервера</ErrorPin>}
             {errors.author_url?.type === 'invalid_url' && <ErrorPin>неверный формат url</ErrorPin>}
-            {errors.author_url?.type === 'minLength' && (
-              <ErrorPin>минимальная длина 3 символа</ErrorPin>
-            )}
             {errors.author_url?.type === 'maxLength' && (
-              <ErrorPin>максимальная длина 20 символов</ErrorPin>
+              <ErrorPin>максимальная длина 512 символов</ErrorPin>
             )}
             <InformationPin>может быть пустым</InformationPin>
             <InformationPin>author_name станет ссылкой</InformationPin>
-            <InformationPin>изменится, только в новых статьях</InformationPin>
-            <InformationPin>должно начинаться с http:// или https://</InformationPin>
+            <InformationPin>изменится только в новых статьях</InformationPin>
+            <InformationPin>должно начинаться с http:// или https:// или mailto:</InformationPin>
           </PinContainer>
         </UserDataItem>
 
         <Link href="/token">Управление токеном</Link>
 
-        <Link href={userInfo?.auth_url} target="_blank">
-          Авторизоваться в telegra.ph
-        </Link>
+        <UserDataItem>
+          <Link href={userInfo?.auth_url} target="_blank">
+            Авторизоваться в telegra.ph
+          </Link>
+          <PinContainer>
+            <InformationPin>ссылка действительна только пять минут</InformationPin>
+            <InformationPin>обновление страницы перевыпускает ссылку</InformationPin>
+          </PinContainer>
+        </UserDataItem>
       </UserData>
     </>
   );
