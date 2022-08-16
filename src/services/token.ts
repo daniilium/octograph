@@ -1,4 +1,5 @@
 import cookies from 'browser-cookies';
+import { API_URL } from '../helpers/constants';
 import { getAccountByToken } from './account';
 
 export async function validateToken() {
@@ -36,3 +37,27 @@ function crypto(str: string) {
 function decrypto(str: string) {
   return atob(str);
 }
+
+export const revokeAccessToken = async () => {
+  const token = getToken();
+  if (!token) return;
+  const response = await fetch(`${API_URL}/revokeAccessToken?access_token=${token}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  });
+
+  const json = await response.json();
+
+  if (json.ok) {
+    const result = json.result;
+    const newToken = result.access_token;
+    removeToken();
+    setToken(newToken);
+  }
+
+  if (!json.ok) {
+    console.log('Error revokeAccessToken', json);
+  }
+};

@@ -10,6 +10,7 @@ import { Page } from '../../views/Page/Page';
 import { Start } from '../../views/Start/Start';
 import { Logout } from '../Logout/Logout';
 import { ProtectedRoute } from './ProtectedRoute';
+import { Token } from '../../views/Token/Token';
 
 export function Router() {
   return (
@@ -24,6 +25,15 @@ export function Router() {
               element={
                 <ProtectedRoute>
                   <Profile />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="token"
+              element={
+                <ProtectedRoute>
+                  <Token />
                 </ProtectedRoute>
               }
             />
