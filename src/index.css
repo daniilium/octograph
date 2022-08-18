@@ -14,17 +14,10 @@ html {
   background-color: #fff;
 }
 
-img {
-  max-width: 100%;
-  display: block;
-}
-
-ul {
-  padding-left: 16px;
-}
-
-#root {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  padding: 21px 0px;
+@media screen and (max-width: 767px) {
+  _::-webkit-full-page-media,
+  _:future,
+  :root .safari_only {
+    padding-bottom: 75px;
+  }
 }
