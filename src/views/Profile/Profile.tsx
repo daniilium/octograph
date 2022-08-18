@@ -98,8 +98,8 @@ export const Profile = () => {
   return (
     <>
       <Header>
-        <Title>Профиль</Title>
-        <Subtitle>профиль</Subtitle>
+        <Title>Аккаунт</Title>
+        <Subtitle>изменение и управление</Subtitle>
       </Header>
 
       <UserData>
