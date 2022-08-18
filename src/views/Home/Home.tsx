@@ -5,16 +5,13 @@ export const Home = () => {
     <>
       <Header>
         <Title>Главная</Title>
-        <Subtitle>удобное управление telegra.ph</Subtitle>
+        <Subtitle>управление telegra.ph</Subtitle>
       </Header>
 
       <article>
-        <p>Возможности:</p>
-        <ul>
-          <li>передача аккаунта</li>
-          <li>изменения данных аккаунта</li>
-          <li>редактирование статей</li>
-        </ul>
+        <p>Функции сайта:</p>
+        <p>• Ссылка для входа</p>
+        <p>• Изменение и управление аккаунтом</p>
       </article>
     </>
   );
