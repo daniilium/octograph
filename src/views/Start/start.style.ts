@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { blackColor, grayColor, redColor } from '../../css-in-js/global';
 
 export const Button = styled.button`
+  color: ${blackColor};
   margin-top: 16px;
   cursor: pointer;
   font-family: 'Roboto', sans-serif;
