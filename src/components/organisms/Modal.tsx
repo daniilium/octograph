@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 
 import { colors } from '../../theme';
@@ -6,7 +5,7 @@ import { Button, Title, MainText } from '../atoms';
 import { Container, Group, Stack } from '../templates';
 
 interface Props {
-  show: boolean;
+  setIsOpen(state: boolean): void;
   title: string;
   text: string;
   onClick(): void;
@@ -17,20 +16,18 @@ const CloseButton = styled.button`
   top: 10px;
   right: 10px;
 
-  background-color: transparent;
+  background-color: white;
   border: none;
   width: 26px;
   height: 26px;
 
   &:hover {
-    color: white;
-    background-color: ${colors.gray}50;
+    font-weight: bold;
+    font-size: 16px;
   }
 `;
 
 const Wrapper = styled.div`
-  background-color: ${colors.black};
-  opacity: 0.1;
   height: 100vh;
   width: 100vw;
 
@@ -50,30 +47,27 @@ const ModalContainer = styled(Container)`
   background-color: white;
 
   padding: 16px 24px 8px 24px;
-  box-shadow: 6px 12px 20px ${colors.black};
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `;
 
 export function Modal(props: Props) {
-  const [show, setShow] = useState(props.show);
-  const cssNone = { display: 'none' };
-  const cssBlock = { display: 'block' };
-  const setVisible = () => (show ? cssBlock : cssNone);
-  const close = () => setShow(false);
+  const { setIsOpen, title, text, onClick } = props;
+  const close = () => setIsOpen(false);
 
   return (
-    <>
-      <Wrapper style={setVisible()} onClick={close}></Wrapper>
-      <ModalContainer style={setVisible()} size="200px">
+    <Wrapper onClick={close}>
+      <ModalContainer size="300px">
         <Stack gap="16px">
-          <Title>{props.title}</Title>
-          <MainText>{props.text}</MainText>
+          <Title>{title}</Title>
+          <MainText>{text}</MainText>
 
           <CloseButton onClick={close}>×</CloseButton>
           <Group grow position="apart">
-            <Button onClick={props.onClick}>Copy</Button>
+            <Button onClick={close}>No</Button>
+            <Button onClick={onClick}>Yes</Button>
           </Group>
         </Stack>
       </ModalContainer>
-    </>
+    </Wrapper>
   );
 }
