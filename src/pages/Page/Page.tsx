@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Link, MainText } from '../../components/atoms';
-import { Header } from '../../components/organisms';
+import { Button, Link, MainText } from '../../components/atoms';
+import { Header, Modal } from '../../components/organisms';
 import { Stack } from '../../components/templates';
-import { getPage } from '../../services/page';
+import { cleanupPage, getPage } from '../../services/page';
 import { PageObject } from '../../services/types';
 
 export function Page() {
@@ -27,22 +27,13 @@ export function Page() {
     get();
   }, [id]);
 
-  // const cutTitle = (title: string | undefined): string => {
-  //   if (!title) return '';
-  //   const len = title.length;
+  const [isOpenConfirmation, setIsOpenConfirmation] = useState(false);
+  const setClearPage = async () => {
+    if (!page?.path) return;
 
-  //   const clientWidth = document.documentElement.clientWidth;
-  //   const workPlace = clientWidth > 730 ? 730 : clientWidth;
-  //   const paddings = 42;
-
-  //   const countChar = Math.ceil((workPlace - paddings) / 18);
-
-  //   const eclipse = '...';
-  //   if (len > countChar) return title.slice(0, countChar - eclipse.length) + eclipse;
-  //   return title;
-  // };
-
-  console.log(page);
+    const result = await cleanupPage(page?.path);
+    if (!result.ok) alert('error cleanup page');
+  };
 
   return (
     <>
@@ -52,15 +43,33 @@ export function Page() {
         <MainText>
           <b>Author name:</b> {page?.author_name}
         </MainText>
+
         <MainText>
           <b>Author url:</b> {page?.author_url}
         </MainText>
+
         <MainText>
           <b>Description:</b> {page?.description}
         </MainText>
+
         <Link href={page?.url} target="_blank">
           Open this page in a new window
         </Link>
+
+        <Stack align="left">
+          <Button onClick={() => setIsOpenConfirmation(true)}>Clear this page</Button>
+        </Stack>
+
+        {isOpenConfirmation && (
+          <Modal
+            setIsOpen={setIsOpenConfirmation}
+            title={'Clear page?'}
+            text={
+              'Clearing the page will result in the loss of data on the page. It will not be possible to undo the action.'
+            }
+            onClick={setClearPage}
+          />
+        )}
       </Stack>
     </>
   );
