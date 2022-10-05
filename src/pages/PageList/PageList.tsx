@@ -43,7 +43,7 @@ function reducer(
 }
 
 const getPage = async (page: number, limit = 20) => {
-  return await getPageList(page * limit, limit);
+  return await getPageList(page * limit - limit, limit);
 };
 
 export function PageList() {
