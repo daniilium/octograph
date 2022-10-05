@@ -10,6 +10,8 @@ export const Home = () => {
         <MainText>Site functionality:</MainText>
         <MainText>• Changing account data</MainText>
         <MainText>• Sign in link</MainText>
+        <MainText>• View created pages</MainText>
+        <MainText>• Cleaning the page of content</MainText>
       </article>
     </>
   );
