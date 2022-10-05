@@ -1,7 +1,8 @@
 import copy from 'copy-to-clipboard';
+import { useState } from 'react';
 import { InfoPin, ButtonAsLink } from '../../components/atoms';
 
-import { Header } from '../../components/organisms';
+import { Header, Modal } from '../../components/organisms';
 import { Stack } from '../../components/templates';
 import { getToken, revokeToken } from '../../services/token';
 
@@ -18,6 +19,8 @@ export function Token() {
     if (token) copy(link);
     return;
   };
+
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   return (
     <>
@@ -37,9 +40,20 @@ export function Token() {
         </Stack>
 
         <Stack>
-          <ButtonAsLink onClick={revokeToken}>Revoke token</ButtonAsLink>
+          <ButtonAsLink onClick={() => setIsOpenModal(true)}>Revoke token</ButtonAsLink>
           <InfoPin>old tokens and links will stop working</InfoPin>
         </Stack>
+
+        {isOpenModal && (
+          <Modal
+            setIsOpen={setIsOpenModal}
+            title={'Revoke token?'}
+            text={
+              "Are you sure you want to revoke the token? This will change the token to a new one, so the login links will change. Don't forget to save the new token."
+            }
+            onClick={revokeToken}
+          />
+        )}
       </Stack>
     </>
   );
