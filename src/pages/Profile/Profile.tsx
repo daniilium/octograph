@@ -43,6 +43,7 @@ const convertToUser = (raw: CreateAccount) => {
 
 export function Profile() {
   const [user, setUser] = useState<ProfileForm>();
+  const [authUrl, setAuthUrl] = useState<string>();
 
   const {
     handleSubmit,
@@ -58,9 +59,11 @@ export function Profile() {
   useEffect(() => {
     const get = async () => {
       const account = await getAccount();
+
       if (account.ok) {
         const newUserData = convertToUser(account);
         setUser(newUserData);
+        setAuthUrl(account.result.auth_url);
 
         // needed to update defaultValues
         reset(newUserData);
@@ -136,7 +139,7 @@ export function Profile() {
                 <>
                   <FormTextField
                     label="Author url:"
-                    placeholder="author rul"
+                    placeholder="author url"
                     name="authorUrl"
                     control={control}
                     rules={rules.authorUrl}
@@ -172,7 +175,9 @@ export function Profile() {
         <hr />
 
         <Stack>
-          <Link href="/">Authorize a browser on telegra.ph</Link>
+          <Link href={authUrl} target="_blank">
+            Authorize a browser on telegra.ph
+          </Link>
           <InfoPin>link is valid for 5 minutes</InfoPin>
           <InfoPin>refreshing the page creates a new link</InfoPin>
         </Stack>
