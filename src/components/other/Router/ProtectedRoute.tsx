@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { useGlobalContext } from './GlobalContext';
+import { useGlobalContext } from '../GlobalContext';
 
 type Props = {
   component: JSX.Element;
