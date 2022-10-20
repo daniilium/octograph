@@ -2,8 +2,6 @@ import { Header } from '../../components/organisms';
 import { MainText } from '../../components/atoms';
 
 export const Home = () => {
-  console.log('test');
-
   return (
     <>
       <Header title="Home" subtitle="management telegra.ph" />
