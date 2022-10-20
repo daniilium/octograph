@@ -1,7 +1,10 @@
 import copy from 'copy-to-clipboard';
 import { useState } from 'react';
-import { InfoPin, ButtonAsLink } from '../../components/atoms';
 
+import { ReactComponent as CopyIcon } from '../../assets/copy.svg';
+import { ReactComponent as RevokeIcon } from '../../assets/revoke.svg';
+
+import { InfoPin, ButtonAsLink } from '../../components/atoms';
 import { Header, Modal } from '../../components/organisms';
 import { Stack } from '../../components/templates';
 import { getToken, revokeToken } from '../../services/token';
@@ -28,19 +31,26 @@ export function Token() {
 
       <Stack gap="16px">
         <Stack>
-          <ButtonAsLink onClick={copyToken}>Copy token</ButtonAsLink>
+          <ButtonAsLink onClick={copyToken}>
+            <CopyIcon height={16} width={16} /> Copy token
+          </ButtonAsLink>
           <InfoPin>
             transferring the token to third parties may result in the loss of account management
           </InfoPin>
         </Stack>
 
         <Stack>
-          <ButtonAsLink onClick={copyLink}>Copy the login link</ButtonAsLink>
+          <ButtonAsLink onClick={copyLink}>
+            <CopyIcon height={16} width={16} /> Copy the login link
+          </ButtonAsLink>
           <InfoPin>contains a token in the link</InfoPin>
         </Stack>
 
         <Stack>
-          <ButtonAsLink onClick={() => setIsOpenModal(true)}>Revoke token</ButtonAsLink>
+          <ButtonAsLink onClick={() => setIsOpenModal(true)}>
+            <RevokeIcon height={20} width={20} />
+            Revoke token
+          </ButtonAsLink>
           <InfoPin>old tokens and links will stop working</InfoPin>
         </Stack>
 

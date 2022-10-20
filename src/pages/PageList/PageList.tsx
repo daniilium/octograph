@@ -1,8 +1,9 @@
 import { useEffect, useReducer, useState } from 'react';
 import styled from 'styled-components';
 
-import { ButtonAsLink, Link, MainText } from '../../components/atoms';
+import { ReactComponent as PageIcon } from '../../assets/page.svg';
 
+import { ButtonAsLink, Link, MainText } from '../../components/atoms';
 import { Header } from '../../components/organisms';
 import { Stack } from '../../components/templates';
 import { useLocalStorage } from '../../services/customHooks';
@@ -11,6 +12,7 @@ import { Page } from '../../services/types';
 
 const PageContainer = styled.div`
   display: flex;
+  gap: 8px;
   align-items: center;
 `;
 
@@ -85,6 +87,7 @@ export function PageList() {
             pages.map((page: Page) => {
               return (
                 <PageContainer key={page.path}>
+                  <PageIcon height={20} width={20} />
                   <PageLink href={`/page/${page.path}`}>{page?.title}</PageLink>
 
                   <MainText>({page.views})</MainText>
