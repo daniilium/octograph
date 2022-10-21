@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { colors, fonts } from '../../theme';
+
+import { colors, fonts } from 'config/theme';
 
 export const Title = styled.h1`
   color: ${colors.black};

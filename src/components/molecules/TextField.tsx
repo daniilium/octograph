@@ -1,7 +1,7 @@
 import { FieldError, RefCallBack } from 'react-hook-form';
 import styled from 'styled-components';
 
-import { colors, fonts } from '../../theme';
+import { colors, fonts } from 'config/theme';
 import { Label } from '../atoms';
 import { Stack } from '../templates';
 

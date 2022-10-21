@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { fonts } from '../../theme';
+
+import { fonts } from 'config/theme';
 
 export const Label = styled.label`
   font-family: ${fonts.main};

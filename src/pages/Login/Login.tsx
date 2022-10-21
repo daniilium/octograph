@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { getAccountByToken } from '../../services/account';
-import { useGlobalContext } from '../../components/other/GlobalContext';
+import { getAccountByToken } from 'services/account';
+import { useGlobalContext } from 'stores/GlobalContext';
 
-import { Button, FormContainer, InfoPin, Link } from '../../components/atoms';
-import { FormTextField } from '../../components/molecules';
-import { Header } from '../../components/organisms';
-import { Stack } from '../../components/templates';
+import { Button, FormContainer, InfoPin, Link } from 'components/atoms';
+import { FormTextField } from 'components/molecules';
+import { Header } from 'components/organisms';
+import { Stack } from 'components/templates';
 
 const rules = {
   login: {
@@ -26,13 +26,6 @@ export function Login() {
   const { GlobalStore, setGlobalStore } = useGlobalContext();
   const navigate = useNavigate();
   const { token } = useParams();
-
-  useEffect(() => {
-    if (token) {
-      reset({ token });
-      handleSubmit(onSubmit)();
-    }
-  }, [token]);
 
   const {
     handleSubmit,
@@ -54,6 +47,14 @@ export function Login() {
       setError('token', { message: 'error validate on server' });
     }
   };
+
+  useEffect(() => {
+    if (token) {
+      reset({ token });
+      handleSubmit(onSubmit)();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   return (
     <>

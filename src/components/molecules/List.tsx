@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-import { MainText } from '../atoms';
-import { Stack } from '../templates';
+import { MainText } from 'components/atoms';
+import { Stack } from 'components/templates';
 
 interface ChildrenProps {
   children: ReactNode;

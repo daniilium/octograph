@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { colors, fonts } from '../../theme';
+
+import { colors, fonts } from 'config/theme';
 
 export const Subtitle = styled.p`
   color: ${colors.gray};

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-import { MainText } from '.';
-import { colors } from '../../theme';
+import { colors } from 'config/theme';
+
+import { MainText } from 'components/atoms';
 
 export const InfoPin = styled(MainText)`
   position: relative;

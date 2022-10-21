@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Button, Link, MainText } from '../../components/atoms';
-import { Header, Modal } from '../../components/organisms';
-import { Stack } from '../../components/templates';
-import { cleanupPage, getPage } from '../../services/page';
-import { PageObject } from '../../services/types';
+import { Button, Link, MainText } from 'components/atoms';
+import { Header, Modal } from 'components/organisms';
+import { Stack } from 'components/templates';
+import { cleanupPage, getPage } from 'services/page';
+import { PageObject } from 'services/types';
 
 export function Page() {
   const { id } = useParams();

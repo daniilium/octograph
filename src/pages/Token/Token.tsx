@@ -1,13 +1,13 @@
 import copy from 'copy-to-clipboard';
 import { useState } from 'react';
 
-import { ReactComponent as CopyIcon } from '../../assets/copy.svg';
-import { ReactComponent as RevokeIcon } from '../../assets/revoke.svg';
+import { ReactComponent as CopyIcon } from 'assets/copy.svg';
+import { ReactComponent as RevokeIcon } from 'assets/revoke.svg';
 
-import { InfoPin, ButtonAsLink } from '../../components/atoms';
-import { Header, Modal } from '../../components/organisms';
-import { Stack } from '../../components/templates';
-import { getToken, revokeToken } from '../../services/token';
+import { InfoPin, ButtonAsLink } from 'components/atoms';
+import { Header, Modal } from 'components/organisms';
+import { Stack } from 'components/templates';
+import { getToken, revokeToken } from 'services/token';
 
 export function Token() {
   const copyToken = () => {

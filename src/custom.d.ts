@@ -18,7 +18,7 @@ declare module '*.module.less' {
   export default classes;
 }
 
-declare module '*.module.styl' {
+declare module '*.module.style' {
   const classes: { [key: string]: string };
   export default classes;
 }

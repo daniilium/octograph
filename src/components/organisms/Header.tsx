@@ -1,5 +1,4 @@
-import { Subtitle } from '../atoms/Subtitle';
-import { Title } from '../atoms/Title';
+import { Title, Subtitle } from 'components/atoms';
 
 interface Props {
   title: string;

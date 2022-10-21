@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLocalStorage } from '../../services/customHooks';
-import { removeToken } from '../../services/token';
+import { useLocalStorage } from 'services/customHooks';
+import { removeToken } from 'services/token';
 
-import { useGlobalContext } from './GlobalContext';
+import { useGlobalContext } from 'stores/GlobalContext';
 
 export function Logout() {
   const navigate = useNavigate();

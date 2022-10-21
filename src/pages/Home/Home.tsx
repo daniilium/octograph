@@ -1,5 +1,5 @@
-import { Header } from '../../components/organisms';
-import { MainText } from '../../components/atoms';
+import { Header } from 'components/organisms';
+import { MainText } from 'components/atoms';
 
 export const Home = () => {
   return (

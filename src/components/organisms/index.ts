@@ -1,2 +1,2 @@
-export { Header } from "./Header";
-export { Modal } from "./Modal";
+export { Header } from 'components/organisms/Header';
+export { Modal } from 'components/organisms/Modal';

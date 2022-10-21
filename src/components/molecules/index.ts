@@ -1,2 +1,2 @@
-export { List, ListItem } from './List';
-export { FormTextField } from './FormTextField';
+export { List, ListItem } from 'components/molecules/List';
+export { FormTextField } from 'components/molecules/FormTextField';

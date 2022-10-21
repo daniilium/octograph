@@ -1,3 +1,3 @@
-export { Container } from "./Container";
-export { Stack } from "./Stack";
-export { Group } from "./Group";
+export { Container } from 'components/templates/Container';
+export { Stack } from 'components/templates/Stack';
+export { Group } from 'components/templates/Group';

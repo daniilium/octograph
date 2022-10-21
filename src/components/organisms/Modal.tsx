@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { colors } from '../../theme';
-import { Button, Title, MainText } from '../atoms';
-import { Container, Group, Stack } from '../templates';
+import { colors } from 'config/theme';
+import { Button, Title, MainText } from 'components/atoms';
+import { Container, Group, Stack } from 'components/templates';
 
 interface Props {
   setIsOpen(state: boolean): void;
