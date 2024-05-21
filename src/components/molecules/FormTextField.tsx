@@ -1,10 +1,10 @@
 import { useController, UseControllerProps } from 'react-hook-form';
 import styled from 'styled-components';
 
-import { colors, fonts } from 'config/theme';
+import { colors, fonts } from '@/config/theme';
 
-import { ErrorPin, Label } from 'components/atoms';
-import { Stack } from 'components/templates';
+import { ErrorPin, Label } from '@/components/atoms';
+import { Stack } from '@/components/templates';
 
 const Input = styled.input<{ isError?: boolean }>`
   border: 1px solid ${(props) => (props.isError ? colors.red : colors.black)};

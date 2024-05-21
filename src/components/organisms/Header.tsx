@@ -1,4 +1,4 @@
-import { Title, Subtitle } from 'components/atoms';
+import { Title, Subtitle } from '@/components/atoms';
 
 interface Props {
   title: string;

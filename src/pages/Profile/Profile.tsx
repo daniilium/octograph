@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { CreateAccount, ErrorMessage, ProfileForm } from 'services/types';
+import { CreateAccount, ErrorMessage, ProfileForm } from '@/services/types';
 
-import { Button, InfoPin, Link, MainText } from 'components/atoms';
-import { FormTextField } from 'components/molecules';
-import { Header } from 'components/organisms';
-import { Stack } from 'components/templates';
+import { Button, InfoPin, Link, MainText } from '@/components/atoms';
+import { FormTextField } from '@/components/molecules';
+import { Header } from '@/components/organisms';
+import { Stack } from '@/components/templates';
 
 import { getAccount } from '../../services/account';
 import { changeProfile } from '../../services/account';

@@ -1,1 +1,1 @@
-export { useLocalStorage } from 'services/customHooks/useLocalStorage';
+export { useLocalStorage } from '@/services/customHooks/useLocalStorage';

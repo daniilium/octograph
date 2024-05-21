@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { existToken } from 'services/token';
+import { existToken } from '@/services/token';
 
-import { GlobalStore } from 'stores/GlobalContext';
-import { Nav } from 'components/organisms/Nav';
+import { GlobalStore } from '@/stores/GlobalContext';
+import { Nav } from '@/components/organisms/Nav';
 
 const ContentContainer = styled.div`
   overflow: hidden;

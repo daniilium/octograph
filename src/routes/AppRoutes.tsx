@@ -1,18 +1,18 @@
 import { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Layout } from 'routes/Layout';
-import { Logout } from 'components/other/Logout';
-import { ProtectedRoute } from 'routes/ProtectedRoute';
+import { Layout } from '@/routes/Layout';
+import { Logout } from '@/components/other/Logout';
+import { ProtectedRoute } from '@/routes/ProtectedRoute';
 
-import { Home } from 'pages';
-const SignUp = lazy(() => import('routes/default/SignUp'));
-const Login = lazy(() => import('routes/default/Login'));
-const Profile = lazy(() => import('routes/default/Profile'));
-const Token = lazy(() => import('routes/default/Token'));
-const PageList = lazy(() => import('routes/default/PageList'));
-const Page = lazy(() => import('routes/default/Page'));
-const Page404 = lazy(() => import('routes/default/Page404'));
+import { Home } from '@/pages';
+const SignUp = lazy(() => import('@/routes/default/SignUp'));
+const Login = lazy(() => import('@/routes/default/Login'));
+const Profile = lazy(() => import('@/routes/default/Profile'));
+const Token = lazy(() => import('@/routes/default/Token'));
+const PageList = lazy(() => import('@/routes/default/PageList'));
+const Page = lazy(() => import('@/routes/default/Page'));
+const Page404 = lazy(() => import('@/routes/default/Page404'));
 
 export function AppRoutes() {
   return (

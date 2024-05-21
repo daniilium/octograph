@@ -1,1 +1,1 @@
-export { Token as default } from 'pages';
+export { Token as default } from '@/pages';

@@ -1,1 +1,1 @@
-export { Profile as default } from 'pages';
+export { Profile as default } from '@/pages';
