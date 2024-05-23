@@ -1,4 +1,4 @@
-# [octograph](https://octograph.netlify.app/)
+# [octograph](https://octograph.pages.dev/)
 
 ## Описание/Description:
 RU: Приложение решает проблему аналитики и управлением своим профилем в telegra.ph
@@ -25,5 +25,5 @@ EN:
 ```
 
 ## Как использовать/How use:
-Go to https://octograph.netlify.app/ or follow [this link](https://octograph.netlify.app/login/d3b25feccb89e508a9114afb82aa421fe2a9712b963b387cc5ad71e58722)
+Go to https://octograph.pages.dev/ or follow [this link](https://octograph.pages.dev/login/d3b25feccb89e508a9114afb82aa421fe2a9712b963b387cc5ad71e58722)
  if you want to sign in with a public token.
