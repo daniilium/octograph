@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { getAccountByToken } from 'services/account';
-import { useGlobalContext } from 'stores/GlobalContext';
+import { getAccountByToken } from '@/services/account';
+import { useGlobalContext } from '@/stores/GlobalContext';
 
-import { Button, FormContainer, InfoPin, Link } from 'components/atoms';
-import { FormTextField } from 'components/molecules';
-import { Header } from 'components/organisms';
-import { Stack } from 'components/templates';
+import { Button, FormContainer, InfoPin, Link } from '@/components/atoms';
+import { FormTextField } from '@/components/molecules';
+import { Header } from '@/components/organisms';
+import { Stack } from '@/components/templates';
 
 const rules = {
   login: {

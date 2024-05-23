@@ -1,12 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, FormContainer, Link, InfoPin } from 'components/atoms';
-import { FormTextField } from 'components/molecules';
-import { Header } from 'components/organisms';
-import { Stack } from 'components/templates';
-import { useGlobalContext } from 'stores/GlobalContext';
-import { createAccount } from 'services/account';
+import { Button, FormContainer, Link, InfoPin } from '@/components/atoms';
+import { FormTextField } from '@/components/molecules';
+import { Header } from '@/components/organisms';
+import { Stack } from '@/components/templates';
+import { useGlobalContext } from '@/stores/GlobalContext';
+import { createAccount } from '@/services/account';
 
 type SignUpForm = {
   shortName: string;

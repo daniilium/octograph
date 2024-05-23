@@ -1,1 +1,1 @@
-export { Login as default } from 'pages';
+export { Login as default } from '@/pages';

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colors } from 'config/theme';
+import { colors } from '@/config/theme';
 
 export const Button = styled.button`
   cursor: pointer;

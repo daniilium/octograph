@@ -1,4 +1,4 @@
-import { Title } from 'components/atoms';
+import { Title } from '@/components/atoms';
 
 function Page404() {
   return (

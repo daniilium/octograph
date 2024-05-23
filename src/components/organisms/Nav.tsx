@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Link } from 'components/atoms';
+import { Link } from '@/components/atoms';
 
 const NavContainer = styled.nav`
   display: flex;

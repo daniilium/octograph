@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { colors, fonts } from 'config/theme';
+import { colors, fonts } from '@/config/theme';
 
 export const MainText = styled.p`
   color: ${colors.black};
