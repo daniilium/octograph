@@ -1,4 +1,3 @@
-import copy from 'copy-to-clipboard';
 import { useState } from 'react';
 
 import CopyIcon from "/assets/copy.svg";
@@ -12,14 +11,14 @@ import { getToken, revokeToken } from '@/services/token';
 export function Token() {
   const copyToken = () => {
     const token = getToken();
-    if (token) copy(token);
+    if (token)  navigator.clipboard.writeText(token);
     return;
   };
 
   const copyLink = () => {
     const token = getToken();
     const link = `${window.location.origin}/login/${token}`;
-    if (token) copy(link);
+    if (token)  navigator.clipboard.writeText(link);
     return;
   };
 
