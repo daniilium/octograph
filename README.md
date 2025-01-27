@@ -1,13 +1,16 @@
 # [octograph](https://octograph.pages.dev/)
 
 ## Как использовать/How use:
-Go to https://octograph.pages.dev/ or follow [this link](https://octograph.pages.dev/login/d3b25feccb89e508a9114afb82aa421fe2a9712b963b387cc5ad71e58722)
+RU: Перейдите по https://octograph.pages.dev/ или по [этой ссылке](https://octograph.pages.dev/login/d3b25feccb89e508a9114afb82aa421fe2a9712b963b387cc5ad71e58722)
+ если вы хотите войти через публичный токен.
+
+EN: Go to https://octograph.pages.dev/ or follow [this link](https://octograph.pages.dev/login/d3b25feccb89e508a9114afb82aa421fe2a9712b963b387cc5ad71e58722)
  if you want to sign in with a public token.
 
 ## Описание/Description:
-RU: Приложение решает проблему аналитики и управлением своим профилем в telegra.ph
+RU: Приложение решает проблему аналитики и управлением своим профилем в [telegra.ph](https://telegra.ph/)
 
-EN: The app solves the problem of analytics and managing your telegra.ph profile
+EN: The app solves the problem of analytics and managing your [telegra.ph](https://telegra.ph/) profile
 
 ## Функционал/Feature list:
 ```
