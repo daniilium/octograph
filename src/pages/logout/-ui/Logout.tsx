@@ -1,11 +1,13 @@
 import { useEffect } from 'react'
+import { useNavigate } from '@tanstack/react-router'
+
+import { removeToken } from '@/entities/auth-token'
 
 import { useGlobalContext } from '@/shared/model/GlobalContext'
-import { redirect } from '@tanstack/react-router'
 import { useLocalStorage } from '@/shared/lib/useLocalStorage'
-import { removeToken } from '@/shared/api/token'
 
 export function Logout() {
+  const navigate = useNavigate()
   const { changeIsAuth } = useGlobalContext()
 
   const [, setLocalPageNumber] = useLocalStorage('pageNumber', 1)
@@ -14,7 +16,7 @@ export function Logout() {
     removeToken()
     changeIsAuth(false)
     setLocalPageNumber(1)
-    throw redirect({ to: '/' })
+    navigate({ to: '/' })
   })
 
   return <></>

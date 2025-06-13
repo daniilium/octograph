@@ -1,4 +1,4 @@
-import { getToken } from '@/shared/api/token'
+import { getToken } from '@/entities/auth-token'
 import { API_URL } from '@/shared/config/constants'
 import { GetPageList } from '@/shared/model/types'
 

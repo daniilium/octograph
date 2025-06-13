@@ -5,7 +5,7 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 import styled from 'styled-components'
 import { useGlobalContext } from '@/shared/model/GlobalContext'
-import { existToken } from '@/shared/api/token'
+import { existToken } from '@/entities/auth-token'
 
 export const Route = createRootRoute({
   component: () => <Layout />,

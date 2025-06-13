@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { useNavigate } from '@tanstack/react-router'
+import { useNavigate, useParams } from '@tanstack/react-router'
 
 import { useGlobalContext } from '@/shared/model/GlobalContext'
 
@@ -7,29 +7,35 @@ import { Button, FormContainer, InfoPin, Link } from '@/shared/ui/atoms'
 import { FormTextField } from '@/shared/ui/molecules'
 import { Header } from '@/shared/ui/organisms'
 import { Stack } from '@/shared/ui/templates'
-import { getAccountByToken } from '@/shared/api/getAccountByToken'
 
-const rules = {
-  login: {
-    required: { value: true, message: 'login is required' },
-    minLength: { value: 60, message: 'min length 60 characters' },
-    maxLength: { value: 60, message: 'max length 60 characters' },
-  },
-}
+import { useEffect } from 'react'
+import { setToken } from '@/entities/auth-token'
+import { loginFormRules } from '../-model/loginFormRules'
+import { useGetAccountByToken } from '@/shared/model/useGetAccountByToken'
 
 interface LoginForm {
   token: string
 }
 
 export function Login() {
+  // Сценарий: нет токена
   const navigate = useNavigate()
   const { changeIsAuth } = useGlobalContext()
 
-  //   const { token } = useParams();
+  const {
+    data: account,
+    error,
+    actionCallback,
+    isPending,
+    isSuccess,
+    isError,
+  } = useGetAccountByToken()
 
   const {
     handleSubmit,
     control,
+    setValue,
+    getValues,
     setError,
     formState: { errors },
   } = useForm<LoginForm>({
@@ -37,23 +43,30 @@ export function Login() {
   })
 
   const onSubmit = async (data: LoginForm) => {
-    const { token } = data
-    const account = await getAccountByToken(token)
-    if (account.ok) {
-      changeIsAuth(true)
-      navigate({ to: '/profile' })
-    } else {
-      setError('token', { message: 'error validate on server' })
-    }
+    await actionCallback({ token: data.token })
   }
 
-  // useEffect(() => {
-  //   if (token) {
-  //     reset({ token });
-  //     handleSubmit(onSubmit)();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [token]);
+  useEffect(() => {
+    if (isSuccess && account?.ok) {
+      setToken(getValues('token'))
+      changeIsAuth(true)
+      navigate({ to: '/profile' })
+    }
+
+    if (isError && error) {
+      setError('token', { message: error })
+    }
+  }, [isSuccess, isError, error])
+
+  // Сценарий: есть токен в параметрах URL
+  const { token } = useParams({ strict: false })
+
+  useEffect(() => {
+    if (token) {
+      setValue('token', token)
+      handleSubmit(onSubmit)()
+    }
+  }, [token])
 
   return (
     <>
@@ -65,7 +78,7 @@ export function Login() {
             placeholder="your token"
             name="token"
             control={control}
-            rules={rules.login}
+            rules={loginFormRules.login}
             error={errors?.token}
           />
 
@@ -73,7 +86,7 @@ export function Login() {
         </Stack>
 
         <Stack direction="column" align="center" gap="8px">
-          <Button>Sign in</Button>
+          <Button disabled={isPending}>Sign in</Button>
           <Link to="/signup">or register</Link>
         </Stack>
       </FormContainer>

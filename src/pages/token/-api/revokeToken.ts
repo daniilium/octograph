@@ -1,5 +1,5 @@
+import { getToken, removeToken, setToken } from '@/entities/auth-token'
 import { API_URL } from '@/shared/config/constants'
-import { getToken, removeToken, setToken } from '../../../shared/api/token'
 
 export const revokeToken = async () => {
   const token = getToken()

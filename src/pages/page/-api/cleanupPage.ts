@@ -1,4 +1,4 @@
-import { getToken } from '@/shared/api/token'
+import { getToken } from '@/entities/auth-token'
 import { API_URL } from '@/shared/config/constants'
 
 export const cleanupPage = async (path: string) => {

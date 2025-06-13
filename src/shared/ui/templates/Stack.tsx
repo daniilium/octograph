@@ -9,7 +9,7 @@ const justifyContent: { [key: string]: string } = {
 
 const alignItems = justifyContent
 
-export const цStack = styled.div<{
+export const Stack = styled.div<{
   gap?: string
   direction?: 'column' | 'row'
   content?: 'left' | 'center' | 'right' | 'between'

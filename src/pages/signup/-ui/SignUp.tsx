@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from '@tanstack/react-router'
 
 import { Button, FormContainer, Link, InfoPin } from '@/shared/ui/atoms'
 import { FormTextField } from '@/shared/ui/molecules'
@@ -6,8 +7,9 @@ import { Header } from '@/shared/ui/organisms'
 import { Stack } from '@/shared/ui/templates'
 import { useGlobalContext } from '@/shared/model/GlobalContext'
 
-import { useNavigate } from '@tanstack/react-router'
-import { createAccount } from '../-api/createAccount'
+import { useSignUp } from '../-model/useSignUp'
+import { setToken } from '@/entities/auth-token'
+import { useEffect } from 'react'
 
 type SignUpForm = {
   shortName: string
@@ -26,6 +28,15 @@ export function SignUp() {
   const { changeIsAuth } = useGlobalContext()
 
   const {
+    data: account,
+    error,
+    signUp,
+    isPending,
+    isSuccess,
+    isError,
+  } = useSignUp()
+
+  const {
     handleSubmit,
     control,
     setError,
@@ -33,16 +44,20 @@ export function SignUp() {
   } = useForm<SignUpForm>()
 
   const onSubmit = async (data: SignUpForm) => {
-    const { shortName } = data
-    const account = await createAccount(shortName)
+    await signUp(data)
+  }
 
-    if (account.ok) {
+  useEffect(() => {
+    if (isSuccess && account?.ok) {
+      setToken(account.result.access_token)
       changeIsAuth(true)
       navigate({ to: '/profile' })
-    } else {
-      setError('shortName', { message: 'error validate on server' })
     }
-  }
+
+    if (isError && error) {
+      setError('shortName', { message: error })
+    }
+  }, [isSuccess, isError, account, error, changeIsAuth, navigate, setError])
 
   return (
     <>
@@ -62,7 +77,7 @@ export function SignUp() {
         </Stack>
 
         <Stack direction="column" align="center" gap="8px">
-          <Button>Create token</Button>
+          <Button disabled={isPending}>Create token</Button>
           <Link to="/login">or sign in</Link>
         </Stack>
       </FormContainer>

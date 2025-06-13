@@ -1,6 +1,5 @@
-import { API_URL } from '../config/constants'
-import { AccountInfo, ErrorMessage } from '../model/types'
-import { setToken } from './token'
+import { API_URL } from '@/shared/config/constants'
+import { AccountInfo, ErrorMessage } from '@/shared/model/types'
 
 export const getAccountByToken = async (
   token: string
@@ -15,9 +14,5 @@ export const getAccountByToken = async (
     }
   )
 
-  const json = await response.json()
-
-  if (json.ok) setToken(token)
-
-  return json
+  return await response.json()
 }

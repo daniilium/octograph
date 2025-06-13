@@ -1,89 +1,94 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { CreateAccount, ErrorMessage, ProfileForm } from '@/shared/model/types'
+import { getToken } from '@/entities/auth-token'
 
+import { ProfileForm } from '@/shared/model/types'
 import { Button, InfoPin, Link, MainText } from '@/shared/ui/atoms'
 import { FormTextField } from '@/shared/ui/molecules'
 import { Header } from '@/shared/ui/organisms'
 import { Stack } from '@/shared/ui/templates'
-import { getAccount } from '../-api/getAccount'
-import { changeProfile } from '../-api/changeProfile'
+import { useGetAccountByToken } from '@/shared/model/useGetAccountByToken'
 
-const rules = {
-  shortName: {
-    required: { value: true, message: 'short name is required' },
-    maxLength: { value: 32, message: 'max length 32 characters' },
-  },
-  authorName: {
-    maxLength: { value: 128, message: 'max length 128 characters' },
-  },
-  authorUrl: {
-    maxLength: { value: 512, message: 'max length 512 characters' },
-    validate: {
-      test: (value: string) => {
-        if (!value.length) return true
-
-        return (
-          value.startsWith('http://') ||
-          value.startsWith('https://') ||
-          value.startsWith('mailto:') ||
-          'wrong start of input'
-        )
-      },
-    },
-  },
-}
-
-const convertToUser = (raw: CreateAccount) => {
-  const { short_name, author_name, author_url } = raw.result
-  return {
-    shortName: short_name,
-    authorName: author_name,
-    authorUrl: author_url,
-  }
-}
+import { profileFormRules } from '../-model/profileFormRules'
+import { convertDtoUser } from '../-model/convertDtoUser'
+import { useEditAccountInfo } from '../-model/useChangeAccountData'
 
 export function Profile() {
   const [user, setUser] = useState<ProfileForm>()
   const [authUrl, setAuthUrl] = useState<string>()
+  const [change, setChange] = useState<boolean>(false)
 
   const {
     handleSubmit,
     control,
     formState: { errors, dirtyFields },
-    reset,
-  } = useForm<ProfileForm>({
-    defaultValues: useMemo(() => user, [user]),
-  })
+    setValue,
+  } = useForm<ProfileForm>()
 
-  const [change, setChange] = useState<boolean>(false)
+  const setValues = (data: ProfileForm) => {
+    setValue('shortName', data.shortName)
+    setValue('authorName', data.authorName)
+    setValue('authorUrl', data.authorUrl)
+  }
+
+  // Сценарий: запрашиваем данные
+  const {
+    data: account,
+    error,
+    actionCallback,
+    isSuccess,
+    isError,
+  } = useGetAccountByToken()
 
   useEffect(() => {
-    const get = async () => {
-      const account = await getAccount()
+    // запрашиваем данные первый раз
+    const token = getToken()
+    if (!isSuccess && !isError && token) actionCallback({ token })
 
-      if (account.ok) {
-        const newUserData = convertToUser(account)
-        setUser(newUserData)
-        setAuthUrl(account.result.auth_url)
-
-        // needed to update defaultValues
-        reset(newUserData)
-      } else alert((account as ErrorMessage).error)
+    // устанавливаем данные
+    if (isSuccess && account?.ok) {
+      const newUserData = convertDtoUser(account)
+      setUser(newUserData)
+      setAuthUrl(account.result.auth_url)
+      setValues(newUserData)
     }
 
-    get()
-  }, [reset])
+    // обрабатываем ошибку
+    if (isError && error) {
+      alert(error)
+    }
+  }, [isSuccess, account])
+
+  // Сценарий: изменяем данные
+  const {
+    data: accountEdit,
+    error: errorEdit,
+    actionCallback: actionCallbackEdit,
+    isSuccess: isSuccessEdit,
+    isError: isErrorEdit,
+  } = useEditAccountInfo()
+
+  useEffect(() => {
+    // устанавливаем изменённые данные
+    if (isSuccessEdit && accountEdit?.ok) {
+      const newUserData = convertDtoUser(accountEdit)
+      setUser(newUserData)
+      setValues(newUserData)
+    }
+
+    // обрабатываем ошибку
+    if (isErrorEdit && errorEdit) {
+      alert(errorEdit)
+    }
+  }, [isSuccessEdit, accountEdit])
 
   const onSubmit = async (form: ProfileForm) => {
-    setChange(false)
+    const token = getToken()
 
-    if (Object.keys(dirtyFields).length === 0) return
+    if (token) await actionCallbackEdit({ token, userForm: form })
 
-    const newUserData = await changeProfile(form)
-    if (newUserData.ok) setUser(convertToUser(newUserData))
-    else alert('error request change profile data')
+    if (!token) alert('You are not logged in')
   }
 
   return (
@@ -94,43 +99,27 @@ export function Profile() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack gap="16px">
             <Stack>
-              {change ? (
-                <>
-                  <FormTextField
-                    label="Short name:"
-                    placeholder="short name"
-                    name="shortName"
-                    control={control}
-                    rules={rules.shortName}
-                    error={errors?.shortName}
-                  />
-                </>
-              ) : (
-                <MainText>
-                  <b>Short name:</b> {user?.shortName}
-                </MainText>
-              )}
+              <FormTextField
+                label="Short name:"
+                placeholder="short name"
+                name="shortName"
+                control={control}
+                rules={profileFormRules.shortName}
+                error={errors?.shortName}
+              />
 
               <InfoPin>only you can see</InfoPin>
             </Stack>
 
             <Stack>
-              {change ? (
-                <>
-                  <FormTextField
-                    label="Author name:"
-                    placeholder="author name"
-                    name="authorName"
-                    control={control}
-                    rules={rules.authorName}
-                    error={errors?.authorName}
-                  />
-                </>
-              ) : (
-                <MainText>
-                  <b>Author name:</b> {user?.authorName || 'empty'}
-                </MainText>
-              )}
+              <FormTextField
+                label="Author name:"
+                placeholder="author name"
+                name="authorName"
+                control={control}
+                rules={profileFormRules.authorName}
+                error={errors?.authorName}
+              />
 
               <InfoPin>may be empty</InfoPin>
               <InfoPin>will only change in the new articles</InfoPin>
@@ -138,22 +127,14 @@ export function Profile() {
             </Stack>
 
             <Stack>
-              {change ? (
-                <>
-                  <FormTextField
-                    label="Author url:"
-                    placeholder="author url"
-                    name="authorUrl"
-                    control={control}
-                    rules={rules.authorUrl}
-                    error={errors?.authorUrl}
-                  />
-                </>
-              ) : (
-                <MainText>
-                  <b>Author url:</b> {user?.authorUrl || 'empty'}
-                </MainText>
-              )}
+              <FormTextField
+                label="Author url:"
+                placeholder="author url"
+                name="authorUrl"
+                control={control}
+                rules={profileFormRules.authorUrl}
+                error={errors?.authorUrl}
+              />
 
               <InfoPin>may be empty</InfoPin>
               <InfoPin>will only change in the new articles</InfoPin>
@@ -165,19 +146,9 @@ export function Profile() {
               </InfoPin>
             </Stack>
 
-            {change && (
-              <Stack align="left">
-                <Button type="submit">Save new user data</Button>
-              </Stack>
-            )}
-
-            {!change && (
-              <Stack align="left">
-                <Button onClick={() => setChange(true)}>
-                  Change user data
-                </Button>
-              </Stack>
-            )}
+            <Stack align="left">
+              <Button onClick={() => setChange(true)}>Change user data</Button>
+            </Stack>
           </Stack>
         </form>
 

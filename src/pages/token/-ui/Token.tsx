@@ -6,12 +6,14 @@ import RevokeIcon from '/assets/revoke.svg'
 import { InfoPin, ButtonAsLink } from '@/shared/ui/atoms'
 import { Header, Modal } from '@/shared/ui/organisms'
 import { Stack } from '@/shared/ui/templates'
-import { getToken } from '@/shared/api/token'
+
 import { revokeToken } from '../-api/revokeToken'
+import { getToken } from '@/entities/auth-token'
 
 export function Token() {
   const copyToken = () => {
     const token = getToken()
+
     if (token) navigator.clipboard.writeText(token)
     return
   }

@@ -1,5 +1,5 @@
 export type CreateAccount = {
-  ok: boolean
+  ok: true
   result: {
     short_name: string
     author_name: string

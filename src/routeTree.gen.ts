@@ -19,6 +19,7 @@ import { Route as PagesIndexRouteImport } from './pages/pages/index'
 import { Route as LogoutIndexRouteImport } from './pages/logout/index'
 import { Route as LoginIndexRouteImport } from './pages/login/index'
 import { Route as PagePageIdRouteImport } from './pages/page/$pageId'
+import { Route as LoginTokenRouteImport } from './pages/login/$token'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -60,9 +61,15 @@ const PagePageIdRoute = PagePageIdRouteImport.update({
   path: '/page/$pageId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginTokenRoute = LoginTokenRouteImport.update({
+  id: '/login/$token',
+  path: '/login/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login/$token': typeof LoginTokenRoute
   '/page/$pageId': typeof PagePageIdRoute
   '/login': typeof LoginIndexRoute
   '/logout': typeof LogoutIndexRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login/$token': typeof LoginTokenRoute
   '/page/$pageId': typeof PagePageIdRoute
   '/login': typeof LoginIndexRoute
   '/logout': typeof LogoutIndexRoute
@@ -84,6 +92,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/login/$token': typeof LoginTokenRoute
   '/page/$pageId': typeof PagePageIdRoute
   '/login/': typeof LoginIndexRoute
   '/logout/': typeof LogoutIndexRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/login/$token'
     | '/page/$pageId'
     | '/login'
     | '/logout'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/login/$token'
     | '/page/$pageId'
     | '/login'
     | '/logout'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/login/$token'
     | '/page/$pageId'
     | '/login/'
     | '/logout/'
@@ -127,6 +139,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LoginTokenRoute: typeof LoginTokenRoute
   PagePageIdRoute: typeof PagePageIdRoute
   LoginIndexRoute: typeof LoginIndexRoute
   LogoutIndexRoute: typeof LogoutIndexRoute
@@ -150,6 +163,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/AppRoutes'
       preLoaderRoute: unknown
+      parentRoute: typeof rootRouteImport
+    }
+    '/login/$token': {
+      id: '/login/$token'
+      path: '/login/$token'
+      fullPath: '/login/$token'
+      preLoaderRoute: typeof LoginTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/page/$pageId': {
@@ -229,6 +249,15 @@ declare module './pages/AppRoutes' {
     FileRoutesByPath['/AppRoutes']['fullPath']
   >
 }
+declare module './pages/login/$token' {
+  const createFileRoute: CreateFileRoute<
+    '/login/$token',
+    FileRoutesByPath['/login/$token']['parentRoute'],
+    FileRoutesByPath['/login/$token']['id'],
+    FileRoutesByPath['/login/$token']['path'],
+    FileRoutesByPath['/login/$token']['fullPath']
+  >
+}
 declare module './pages/page/$pageId' {
   const createFileRoute: CreateFileRoute<
     '/page/$pageId',
@@ -304,6 +333,7 @@ declare module './pages/pages/api/getPageList' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LoginTokenRoute: LoginTokenRoute,
   PagePageIdRoute: PagePageIdRoute,
   LoginIndexRoute: LoginIndexRoute,
   LogoutIndexRoute: LogoutIndexRoute,
