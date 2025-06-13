@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { colors, fonts } from '@/shared/config/theme';
+import { colors, fonts } from '@/shared/config/theme'
 
 export const ButtonAsLink = styled.button`
   display: inline-block;
@@ -14,4 +14,4 @@ export const ButtonAsLink = styled.button`
   color: ${colors.black};
   font-size: 18px;
   text-decoration: underline;
-`;
+`

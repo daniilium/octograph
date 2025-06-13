@@ -1,1 +1,1 @@
-export const API_URL = 'https://api.telegra.ph';
+export const API_URL = 'https://api.telegra.ph'

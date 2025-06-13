@@ -1,16 +1,14 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect, useMemo, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
-import { CreateAccount, ErrorMessage, ProfileForm } from '@/shared/model/types';
+import { CreateAccount, ErrorMessage, ProfileForm } from '@/shared/model/types'
 
-import { Button, InfoPin, Link, MainText } from '@/shared/ui/atoms';
-import { FormTextField } from '@/shared/ui/molecules';
-import { Header } from '@/shared/ui/organisms';
-import { Stack } from '@/shared/ui/templates';
-import { getAccount } from '../-api/getAccount';
-import { changeProfile } from '../-api/changeProfile';
-
-
+import { Button, InfoPin, Link, MainText } from '@/shared/ui/atoms'
+import { FormTextField } from '@/shared/ui/molecules'
+import { Header } from '@/shared/ui/organisms'
+import { Stack } from '@/shared/ui/templates'
+import { getAccount } from '../-api/getAccount'
+import { changeProfile } from '../-api/changeProfile'
 
 const rules = {
   shortName: {
@@ -24,27 +22,31 @@ const rules = {
     maxLength: { value: 512, message: 'max length 512 characters' },
     validate: {
       test: (value: string) => {
-        if (!value.length) return true;
+        if (!value.length) return true
 
         return (
           value.startsWith('http://') ||
           value.startsWith('https://') ||
           value.startsWith('mailto:') ||
           'wrong start of input'
-        );
+        )
       },
     },
   },
-};
+}
 
 const convertToUser = (raw: CreateAccount) => {
-  const { short_name, author_name, author_url } = raw.result;
-  return { shortName: short_name, authorName: author_name, authorUrl: author_url };
-};
+  const { short_name, author_name, author_url } = raw.result
+  return {
+    shortName: short_name,
+    authorName: author_name,
+    authorUrl: author_url,
+  }
+}
 
 export function Profile() {
-  const [user, setUser] = useState<ProfileForm>();
-  const [authUrl, setAuthUrl] = useState<string>();
+  const [user, setUser] = useState<ProfileForm>()
+  const [authUrl, setAuthUrl] = useState<string>()
 
   const {
     handleSubmit,
@@ -53,36 +55,36 @@ export function Profile() {
     reset,
   } = useForm<ProfileForm>({
     defaultValues: useMemo(() => user, [user]),
-  });
+  })
 
-  const [change, setChange] = useState<boolean>(false);
+  const [change, setChange] = useState<boolean>(false)
 
   useEffect(() => {
     const get = async () => {
-      const account = await getAccount();
+      const account = await getAccount()
 
       if (account.ok) {
-        const newUserData = convertToUser(account);
-        setUser(newUserData);
-        setAuthUrl(account.result.auth_url);
+        const newUserData = convertToUser(account)
+        setUser(newUserData)
+        setAuthUrl(account.result.auth_url)
 
         // needed to update defaultValues
-        reset(newUserData);
-      } else alert((account as ErrorMessage).error);
-    };
+        reset(newUserData)
+      } else alert((account as ErrorMessage).error)
+    }
 
-    get();
-  }, [reset]);
+    get()
+  }, [reset])
 
   const onSubmit = async (form: ProfileForm) => {
-    setChange(false);
+    setChange(false)
 
-    if (Object.keys(dirtyFields).length === 0) return;
+    if (Object.keys(dirtyFields).length === 0) return
 
-    const newUserData = await changeProfile(form);
-    if (newUserData.ok) setUser(convertToUser(newUserData));
-    else alert('error request change profile data');
-  };
+    const newUserData = await changeProfile(form)
+    if (newUserData.ok) setUser(convertToUser(newUserData))
+    else alert('error request change profile data')
+  }
 
   return (
     <>
@@ -155,8 +157,12 @@ export function Profile() {
 
               <InfoPin>may be empty</InfoPin>
               <InfoPin>will only change in the new articles</InfoPin>
-              <InfoPin>must begin with "http://" or "https://" or "mailto:"</InfoPin>
-              <InfoPin>opened when users click on the author's name below the title</InfoPin>
+              <InfoPin>
+                must begin with "http://" or "https://" or "mailto:"
+              </InfoPin>
+              <InfoPin>
+                opened when users click on the author's name below the title
+              </InfoPin>
             </Stack>
 
             {change && (
@@ -167,7 +173,9 @@ export function Profile() {
 
             {!change && (
               <Stack align="left">
-                <Button onClick={() => setChange(true)}>Change user data</Button>
+                <Button onClick={() => setChange(true)}>
+                  Change user data
+                </Button>
               </Stack>
             )}
           </Stack>
@@ -188,8 +196,5 @@ export function Profile() {
         <Link to="/logout">Logout</Link>
       </Stack>
     </>
-  );
+  )
 }
-
-
-

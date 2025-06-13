@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const FormContainer = styled.form`
   flex-grow: 1;
@@ -6,4 +6,4 @@ export const FormContainer = styled.form`
   flex-direction: column;
   justify-content: center;
   gap: 16px;
-`;
+`

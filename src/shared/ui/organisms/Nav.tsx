@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { Link } from '@/shared/ui/atoms';
+import { Link } from '@/shared/ui/atoms'
 
 const NavContainer = styled.nav`
   display: flex;
@@ -11,14 +11,14 @@ const NavContainer = styled.nav`
   max-width: 730px;
   margin-left: auto;
   margin-right: auto;
-`;
+`
 
 type NavProps = {
-  isAuth: boolean;
-};
+  isAuth: boolean
+}
 
 export const Nav = (props: NavProps) => {
-  const { isAuth } = props;
+  const { isAuth } = props
 
   return (
     <NavContainer className="safari_only">
@@ -33,5 +33,5 @@ export const Nav = (props: NavProps) => {
         <Link to="/login">Sign in</Link>
       )}
     </NavContainer>
-  );
-};
+  )
+}

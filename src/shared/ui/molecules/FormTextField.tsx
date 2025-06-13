@@ -1,10 +1,10 @@
-import { useController, UseControllerProps } from 'react-hook-form';
-import styled from 'styled-components';
+import { useController, UseControllerProps } from 'react-hook-form'
+import styled from 'styled-components'
 
-import { colors, fonts } from '@/shared/config/theme';
+import { colors, fonts } from '@/shared/config/theme'
 
-import { ErrorPin, Label } from '@/shared/ui/atoms';
-import { Stack } from '@/shared/ui/templates';
+import { ErrorPin, Label } from '@/shared/ui/atoms'
+import { Stack } from '@/shared/ui/templates'
 
 const Input = styled.input<{ isError?: boolean }>`
   border: 1px solid ${(props) => (props.isError ? colors.red : colors.black)};
@@ -18,19 +18,19 @@ const Input = styled.input<{ isError?: boolean }>`
     border: 2px solid ${(props) => (props.isError ? colors.red : colors.black)};
     outline: none;
   }
-`;
+`
 
 type Props = {
-  label?: string;
-  placeholder?: string;
-  error?: any;
-} & UseControllerProps<any>;
+  label?: string
+  placeholder?: string
+  error?: any
+} & UseControllerProps<any>
 
 export const FormTextField = (props: Props) => {
-  const { label, placeholder, error } = props;
-  const isError = Boolean(error);
+  const { label, placeholder, error } = props
+  const isError = Boolean(error)
 
-  const { field } = useController(props);
+  const { field } = useController(props)
 
   return (
     <Label>
@@ -49,5 +49,5 @@ export const FormTextField = (props: Props) => {
         {error && <ErrorPin>{error.message || JSON.stringify(error)}</ErrorPin>}
       </Stack>
     </Label>
-  );
-};
+  )
+}

@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { colors, fonts } from '@/shared/config/theme';
+import { colors, fonts } from '@/shared/config/theme'
 
 export const MainText = styled.p`
   color: ${colors.black};
@@ -8,4 +8,4 @@ export const MainText = styled.p`
   font-size: 18px;
   margin: 0;
   line-height: 24px;
-`;
+`

@@ -1,9 +1,10 @@
-import { API_URL } from '../config/constants';
-import { AccountInfo, ErrorMessage } from '../model/types';
-import { setToken } from './token';
+import { API_URL } from '../config/constants'
+import { AccountInfo, ErrorMessage } from '../model/types'
+import { setToken } from './token'
 
-
-export const getAccountByToken = async (token: string): Promise<AccountInfo | ErrorMessage> => {
+export const getAccountByToken = async (
+  token: string
+): Promise<AccountInfo | ErrorMessage> => {
   const response = await fetch(
     `${API_URL}/getAccountInfo?access_token=${token}&fields=["short_name","author_name","author_url","auth_url","page_count"]`,
     {
@@ -12,11 +13,11 @@ export const getAccountByToken = async (token: string): Promise<AccountInfo | Er
         Accept: 'application/json',
       },
     }
-  );
+  )
 
-  const json = await response.json();
+  const json = await response.json()
 
-  if (json.ok) setToken(token);
+  if (json.ok) setToken(token)
 
-  return json;
-};
+  return json
+}

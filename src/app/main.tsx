@@ -19,9 +19,9 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <AppProviders> 
+      <AppProviders>
         <RouterProvider router={router} />
       </AppProviders>
-    </StrictMode>,
+    </StrictMode>
   )
 }

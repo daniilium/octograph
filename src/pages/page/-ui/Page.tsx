@@ -1,50 +1,51 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
+import { Button, Link, MainText } from '@/shared/ui/atoms'
+import { Header, Modal } from '@/shared/ui/organisms'
+import { Stack } from '@/shared/ui/templates'
 
-import { Button, Link, MainText } from '@/shared/ui/atoms';
-import { Header, Modal } from '@/shared/ui/organisms';
-import { Stack } from '@/shared/ui/templates';
+import { PageObject } from '@/shared/model/types'
+import { useParams } from '@tanstack/react-router'
 
-import { PageObject } from '@/shared/model/types';
-import { useParams } from '@tanstack/react-router';
-
-import { getPage } from '../-api/getPage';
-import { cleanupPage } from '../-api/cleanupPage';
-
+import { getPage } from '../-api/getPage'
+import { cleanupPage } from '../-api/cleanupPage'
 
 export function Page() {
   const { pageId: id } = useParams({
     from: '/page/$pageId',
   })
-  const [page, setPage] = useState<PageObject>();
+  const [page, setPage] = useState<PageObject>()
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) return
 
     const get = async () => {
-      const page = await getPage(id);
+      const page = await getPage(id)
       if (!page.ok) {
-        alert('error load page');
-        return;
+        alert('error load page')
+        return
       }
 
-      setPage(page.result);
-    };
+      setPage(page.result)
+    }
 
-    get();
-  }, [id]);
+    get()
+  }, [id])
 
-  const [isOpenConfirmation, setIsOpenConfirmation] = useState(false);
+  const [isOpenConfirmation, setIsOpenConfirmation] = useState(false)
   const setClearPage = async () => {
-    if (!page?.path) return;
+    if (!page?.path) return
 
-    const result = await cleanupPage(page?.path);
-    if (!result.ok) alert('error cleanup page');
-  };
+    const result = await cleanupPage(page?.path)
+    if (!result.ok) alert('error cleanup page')
+  }
 
   return (
     <>
-      <Header title={page?.title || 'empty'} subtitle={`Просмотров: ${page?.views}`} />
+      <Header
+        title={page?.title || 'empty'}
+        subtitle={`Просмотров: ${page?.views}`}
+      />
 
       <Stack gap="8px">
         <MainText>
@@ -64,7 +65,9 @@ export function Page() {
         </Link>
 
         <Stack align="left">
-          <Button onClick={() => setIsOpenConfirmation(true)}>Clear this page</Button>
+          <Button onClick={() => setIsOpenConfirmation(true)}>
+            Clear this page
+          </Button>
         </Stack>
 
         {isOpenConfirmation && (
@@ -79,5 +82,5 @@ export function Page() {
         )}
       </Stack>
     </>
-  );
+  )
 }

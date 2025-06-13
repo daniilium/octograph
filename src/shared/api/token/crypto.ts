@@ -1,3 +1,3 @@
 export function crypto(str: string) {
-  return btoa(str);
+  return btoa(str)
 }

@@ -1,5 +1,5 @@
-import cookies from 'browser-cookies';
+import cookies from 'browser-cookies'
 
 export const removeToken = () => {
-  cookies.erase('token');
-};
+  cookies.erase('token')
+}

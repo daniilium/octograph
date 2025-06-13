@@ -1,5 +1,5 @@
-import { Logout } from "./-ui/Logout";
+import { Logout } from './-ui/Logout'
 
 export const Route = createFileRoute({
-    component: Logout,
-  })
+  component: Logout,
+})

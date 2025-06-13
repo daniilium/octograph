@@ -1,15 +1,44 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { colors } from '@/shared/config/theme';
-import { Button, Title, MainText } from '@/shared/ui/atoms';
-import { Container, Group, Stack } from '@/shared/ui/templates';
+import { colors } from '@/shared/config/theme'
+import { Button, Title, MainText } from '@/shared/ui/atoms'
+import { Stack } from '@/shared/ui/templates'
 
 interface Props {
-  setIsOpen(state: boolean): void;
-  title: string;
-  text: string;
-  onClick(): void;
+  setIsOpen(state: boolean): void
+  title: string
+  text: string
+  onClick(): void
 }
+
+const Group = styled.div<{
+  position?: 'left' | 'center' | 'right' | 'apart'
+  grow?: boolean
+}>`
+  display: flex;
+  flex-direction: row;
+  justify-content: ${(props) => {
+    const position = props.position
+    if (position === 'left') return 'start'
+    if (position === 'center') return 'center'
+    if (position === 'right') return 'end'
+    if (position === 'apart') return 'space-between'
+  }};
+
+  gap: 10px;
+
+  * {
+    flex-grow: ${(props) => props.grow && 1};
+  }
+`
+
+const Container = styled.div<{ size?: string }>`
+  padding-left: 16px;
+  padding-right: 16px;
+  width: ${(props) => props.size};
+  margin-left: auto;
+  margin-right: auto;
+`
 
 const CloseButton = styled.button`
   position: absolute;
@@ -25,7 +54,7 @@ const CloseButton = styled.button`
     font-weight: bold;
     font-size: 16px;
   }
-`;
+`
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -34,7 +63,7 @@ const Wrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-`;
+`
 
 const ModalContainer = styled(Container)`
   position: absolute;
@@ -48,11 +77,11 @@ const ModalContainer = styled(Container)`
 
   padding: 16px 24px 8px 24px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-`;
+`
 
 export function Modal(props: Props) {
-  const { setIsOpen, title, text, onClick } = props;
-  const close = () => setIsOpen(false);
+  const { setIsOpen, title, text, onClick } = props
+  const close = () => setIsOpen(false)
 
   return (
     <Wrapper onClick={close}>
@@ -69,5 +98,5 @@ export function Modal(props: Props) {
         </Stack>
       </ModalContainer>
     </Wrapper>
-  );
+  )
 }

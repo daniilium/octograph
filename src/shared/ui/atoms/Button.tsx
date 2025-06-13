@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { colors } from '@/shared/config/theme';
+import { colors } from '@/shared/config/theme'
 
 export const Button = styled.button`
   cursor: pointer;
@@ -19,4 +19,4 @@ export const Button = styled.button`
   &:active {
     transform: translate(0, 2px);
   }
-`;
+`

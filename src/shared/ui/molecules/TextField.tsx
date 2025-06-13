@@ -1,9 +1,9 @@
-import { FieldError, RefCallBack } from 'react-hook-form';
-import styled from 'styled-components';
+import { FieldError, RefCallBack } from 'react-hook-form'
+import styled from 'styled-components'
 
-import { colors, fonts } from '@/shared/config/theme';
-import { Label } from '../atoms';
-import { Stack } from '../templates';
+import { colors, fonts } from '@/shared/config/theme'
+import { Label } from '../atoms'
+import { Stack } from '../templates'
 
 const Input = styled.input<{ error: boolean }>`
   border: 1px solid ${(props) => (props.error ? colors.red : colors.black)};
@@ -17,21 +17,21 @@ const Input = styled.input<{ error: boolean }>`
     border: 2px solid ${(props) => (props.error ? colors.red : colors.black)};
     outline: none;
   }
-`;
+`
 
 type Props = {
-  label?: string;
-  placeholder?: string;
-  onChange?(value: any): void;
-  onBlur?(): void;
-  inputRef?: RefCallBack;
+  label?: string
+  placeholder?: string
+  onChange?(value: any): void
+  onBlur?(): void
+  inputRef?: RefCallBack
   // initValue?: string;
-  value?: string;
-  error?: FieldError | undefined;
-};
+  value?: string
+  error?: FieldError | undefined
+}
 
 export const TextField = (props: Props) => {
-  const { label, placeholder, onChange, onBlur, inputRef, error } = props;
+  const { label, placeholder, onChange, onBlur, inputRef, error } = props
 
   return (
     <Label>
@@ -48,5 +48,5 @@ export const TextField = (props: Props) => {
         />
       </Stack>
     </Label>
-  );
-};
+  )
+}

@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-import { colors } from '@/shared/config/theme';
+import { colors } from '@/shared/config/theme'
 
-import { MainText } from '@/shared/ui/atoms';
+import { MainText } from '@/shared/ui/atoms'
 
 export const InfoPin = styled(MainText)`
   position: relative;
@@ -15,4 +15,4 @@ export const InfoPin = styled(MainText)`
     left: 0px;
     content: '•';
   }
-`;
+`

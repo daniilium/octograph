@@ -1,20 +1,17 @@
+import { useForm } from 'react-hook-form'
 
+import { Button, FormContainer, Link, InfoPin } from '@/shared/ui/atoms'
+import { FormTextField } from '@/shared/ui/molecules'
+import { Header } from '@/shared/ui/organisms'
+import { Stack } from '@/shared/ui/templates'
+import { useGlobalContext } from '@/shared/model/GlobalContext'
 
-import { useForm } from 'react-hook-form';
-
-
-import { Button, FormContainer, Link, InfoPin } from '@/shared/ui/atoms';
-import { FormTextField } from '@/shared/ui/molecules';
-import { Header } from '@/shared/ui/organisms';
-import { Stack } from '@/shared/ui/templates';
-import { useGlobalContext } from '@/shared/model/GlobalContext';
-
-import { useNavigate } from '@tanstack/react-router';
-import { createAccount } from '../-api/createAccount';
+import { useNavigate } from '@tanstack/react-router'
+import { createAccount } from '../-api/createAccount'
 
 type SignUpForm = {
-  shortName: string;
-};
+  shortName: string
+}
 
 const rules = {
   shortName: {
@@ -22,30 +19,30 @@ const rules = {
     minLength: { value: 1, message: 'min length 1 characters' },
     maxLength: { value: 32, message: 'max length 6032 characters' },
   },
-};
+}
 
 export function SignUp() {
   const navigate = useNavigate()
-  const { changeIsAuth } = useGlobalContext();
+  const { changeIsAuth } = useGlobalContext()
 
   const {
     handleSubmit,
     control,
     setError,
     formState: { errors },
-  } = useForm<SignUpForm>();
+  } = useForm<SignUpForm>()
 
   const onSubmit = async (data: SignUpForm) => {
-    const { shortName } = data;
-    const account = await createAccount(shortName);
+    const { shortName } = data
+    const account = await createAccount(shortName)
 
-    if (account.ok) {      
-      changeIsAuth(true);
-      navigate({to: '/profile'})
+    if (account.ok) {
+      changeIsAuth(true)
+      navigate({ to: '/profile' })
     } else {
-      setError('shortName', { message: 'error validate on server' });
+      setError('shortName', { message: 'error validate on server' })
     }
-  };
+  }
 
   return (
     <>
@@ -70,5 +67,5 @@ export function SignUp() {
         </Stack>
       </FormContainer>
     </>
-  );
+  )
 }

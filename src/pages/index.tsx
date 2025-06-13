@@ -1,5 +1,5 @@
-import { Header } from '@/shared/ui/organisms';
-import { MainText } from '@/shared/ui/atoms';
+import { Header } from '@/shared/ui/organisms'
+import { MainText } from '@/shared/ui/atoms'
 
 export const Route = createFileRoute({
   component: Index,
@@ -18,5 +18,5 @@ function Index() {
         <MainText>• Cleaning the page of content</MainText>
       </article>
     </>
-  );
+  )
 }

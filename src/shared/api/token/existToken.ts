@@ -1,6 +1,6 @@
-import { getToken } from '.';
+import { getToken } from '.'
 
 export const existToken = () => {
-  const token = getToken();
-  return Boolean(token);
-};
+  const token = getToken()
+  return Boolean(token)
+}

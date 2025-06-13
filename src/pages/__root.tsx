@@ -1,16 +1,15 @@
-import { Nav } from '@/shared/ui/organisms/Nav';
+import { Nav } from '@/shared/ui/organisms/Nav'
 
-import { createRootRoute,  Outlet } from '@tanstack/react-router'
+import { createRootRoute, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
-import styled from 'styled-components';
-import {  useGlobalContext } from '@/shared/model/GlobalContext';
-import { existToken } from '@/shared/api/token';
-
+import styled from 'styled-components'
+import { useGlobalContext } from '@/shared/model/GlobalContext'
+import { existToken } from '@/shared/api/token'
 
 export const Route = createRootRoute({
-  component: () => (<Layout />)})
-
+  component: () => <Layout />,
+})
 
 const ContentContainer = styled.div`
   overflow: hidden;
@@ -25,20 +24,18 @@ const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-`;
+`
 
 const LayoutContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-`;
-
+`
 
 function Layout() {
-
-  const { isAuth, changeIsAuth } = useGlobalContext();
-  changeIsAuth(existToken());
+  const { isAuth, changeIsAuth } = useGlobalContext()
+  changeIsAuth(existToken())
 
   return (
     <LayoutContainer>
@@ -50,5 +47,5 @@ function Layout() {
 
       <Nav isAuth={isAuth} />
     </LayoutContainer>
-  );
+  )
 }
