@@ -1,13 +1,17 @@
-import { getToken } from '@/entities/auth-token'
 import { API_URL } from '@/shared/config/constants'
 import { GetPageList } from '@/shared/model/types'
 
-export const getPageList = async (
-  offset = 0,
-  limit = 20
-): Promise<GetPageList> => {
-  const token = getToken()
+export type GetPageListPayload = {
+  offset: number
+  limit: number
+  token: string
+}
 
+export const getPageList = async ({
+  offset,
+  limit,
+  token,
+}: GetPageListPayload): Promise<GetPageList> => {
   const response = await fetch(
     `${API_URL}/getPageList?access_token=${token}&offset=${offset}&limit=${limit}`,
     {
@@ -18,7 +22,5 @@ export const getPageList = async (
     }
   )
 
-  const json = await response.json()
-
-  return json
+  return await response.json()
 }

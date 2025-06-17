@@ -9,7 +9,7 @@ import { Header } from '@/shared/ui/organisms'
 import { Stack } from '@/shared/ui/templates'
 
 import { useEffect } from 'react'
-import { setToken } from '@/entities/auth-token'
+import { setToken } from '@/features/auth-token'
 import { loginFormRules } from '../-model/loginFormRules'
 import { useGetAccountByToken } from '@/shared/model/useGetAccountByToken'
 

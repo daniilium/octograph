@@ -158,13 +158,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/AppRoutes': {
-      id: '/AppRoutes'
-      path: ''
-      fullPath: '/AppRoutes'
-      preLoaderRoute: unknown
-      parentRoute: typeof rootRouteImport
-    }
     '/login/$token': {
       id: '/login/$token'
       path: '/login/$token'
@@ -221,13 +214,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TokenIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/pages/api/getPageList': {
-      id: '/pages/api/getPageList'
-      path: ''
-      fullPath: '/pages/api/getPageList'
-      preLoaderRoute: unknown
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -238,15 +224,6 @@ declare module './pages/index' {
     FileRoutesByPath['/']['id'],
     FileRoutesByPath['/']['path'],
     FileRoutesByPath['/']['fullPath']
-  >
-}
-declare module './pages/AppRoutes' {
-  const createFileRoute: CreateFileRoute<
-    '/AppRoutes',
-    FileRoutesByPath['/AppRoutes']['parentRoute'],
-    FileRoutesByPath['/AppRoutes']['id'],
-    FileRoutesByPath['/AppRoutes']['path'],
-    FileRoutesByPath['/AppRoutes']['fullPath']
   >
 }
 declare module './pages/login/$token' {
@@ -319,15 +296,6 @@ declare module './pages/token/index' {
     FileRoutesByPath['/token/']['id'],
     FileRoutesByPath['/token/']['path'],
     FileRoutesByPath['/token/']['fullPath']
-  >
-}
-declare module './pages/pages/api/getPageList' {
-  const createFileRoute: CreateFileRoute<
-    '/pages/api/getPageList',
-    FileRoutesByPath['/pages/api/getPageList']['parentRoute'],
-    FileRoutesByPath['/pages/api/getPageList']['id'],
-    FileRoutesByPath['/pages/api/getPageList']['path'],
-    FileRoutesByPath['/pages/api/getPageList']['fullPath']
   >
 }
 

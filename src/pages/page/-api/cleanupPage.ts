@@ -1,9 +1,15 @@
-import { getToken } from '@/entities/auth-token'
 import { API_URL } from '@/shared/config/constants'
+import { PageAnswer, ErrorMessage } from '@/shared/model/types'
 
-export const cleanupPage = async (path: string) => {
-  const token = getToken()
+export type CleanupPagePayload = {
+  path: string
+  token: string
+}
 
+export async function cleanupPage({
+  path,
+  token,
+}: CleanupPagePayload): Promise<PageAnswer | ErrorMessage> {
   const response = await fetch(
     `${API_URL}/editPage/${path}?access_token=${token}&title=Empty+Page&author_name=Anonymous&content=[%7B%22tag%22:%22p%22,%22children%22:[%22%20%22]%7D]&return_content=true`,
     {
@@ -14,7 +20,5 @@ export const cleanupPage = async (path: string) => {
     }
   )
 
-  const json = await response.json()
-
-  return json
+  return await response.json()
 }

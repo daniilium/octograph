@@ -1,5 +1,11 @@
 import { API_URL } from '@/shared/config/constants'
-import { CreateAccount, ErrorMessage, ProfileForm } from '@/shared/model/types'
+import { CreateAccount, ErrorMessage } from '@/shared/model/types'
+
+export type ProfileForm = {
+  shortName: string
+  authorName: string
+  authorUrl: string
+}
 
 export const editAccountInfo = async (
   token: string,

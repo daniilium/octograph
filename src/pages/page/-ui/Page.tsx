@@ -4,63 +4,81 @@ import { Button, Link, MainText } from '@/shared/ui/atoms'
 import { Header, Modal } from '@/shared/ui/organisms'
 import { Stack } from '@/shared/ui/templates'
 
-import { PageObject } from '@/shared/model/types'
 import { useParams } from '@tanstack/react-router'
 
-import { getPage } from '../-api/getPage'
-import { cleanupPage } from '../-api/cleanupPage'
+import { useGetPage } from '../-model/useGetPage'
+import { useCleanupPage } from '../-model/useCleanupPage'
+import { Page as PageType } from '@/shared/model/types'
+import { getToken } from '@/features/auth-token'
+
+const initialState: PageType = {
+  title: 'Page',
+  views: 0,
+  author_name: '',
+  author_url: '',
+  description: '',
+  url: '',
+  path: '',
+}
 
 export function Page() {
-  const { pageId: id } = useParams({
+  const { pageId } = useParams({
     from: '/page/$pageId',
   })
-  const [page, setPage] = useState<PageObject>()
+
+  const [page, setPage] = useState(initialState)
+
+  const { data, actionCallback } = useGetPage()
 
   useEffect(() => {
-    if (!id) return
-
-    const get = async () => {
-      const page = await getPage(id)
-      if (!page.ok) {
-        alert('error load page')
-        return
-      }
-
-      setPage(page.result)
+    if (!data) {
+      actionCallback({ path: pageId })
     }
 
-    get()
-  }, [id])
+    if (data) {
+      setPage(data.result)
+    }
+  }, [pageId, data])
 
   const [isOpenConfirmation, setIsOpenConfirmation] = useState(false)
-  const setClearPage = async () => {
-    if (!page?.path) return
+  const { data: emptyPage, actionCallback: setClearPage } = useCleanupPage()
 
-    const result = await cleanupPage(page?.path)
-    if (!result.ok) alert('error cleanup page')
+  const handleClearPage = () => {
+    const token = getToken()
+    if (!token) {
+      console.error('no token')
+      return
+    }
+
+    setClearPage({ path: pageId, token })
+    setIsOpenConfirmation(false)
   }
+
+  useEffect(() => {
+    if (emptyPage) {
+      setPage(emptyPage.result)
+      setIsOpenConfirmation(false)
+    }
+  }, [emptyPage])
 
   return (
     <>
-      <Header
-        title={page?.title || 'empty'}
-        subtitle={`Просмотров: ${page?.views}`}
-      />
+      <Header title={page.title} subtitle={`Views: ${page.views}`} />
 
       <Stack gap="8px">
         <MainText>
-          <b>Author name:</b> {page?.author_name}
+          <b>Author name:</b> {page.author_name}
         </MainText>
 
         <MainText>
-          <b>Author url:</b> {page?.author_url}
+          <b>Author url:</b> {page.author_url}
         </MainText>
 
         <MainText>
-          <b>Description:</b> {page?.description}
+          <b>Description:</b> {page.description}
         </MainText>
 
-        <Link to={page?.url} target="_blank">
+        <Link to={page.url} target="_blank">
           Open this page in a new window
         </Link>
 
@@ -77,7 +95,7 @@ export function Page() {
             text={
               'Clearing the page will result in the loss of data on the page. It will not be possible to undo the action.'
             }
-            onClick={setClearPage}
+            onClick={handleClearPage}
           />
         )}
       </Stack>

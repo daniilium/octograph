@@ -5,11 +5,9 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 import styled from 'styled-components'
 import { useGlobalContext } from '@/shared/model/GlobalContext'
-import { existToken } from '@/entities/auth-token'
-
-export const Route = createRootRoute({
-  component: () => <Layout />,
-})
+import { existToken } from '@/features/auth-token'
+import { authGuard } from '@/features/auth-guard/lib/authGuard'
+import { useEffect } from 'react'
 
 const ContentContainer = styled.div`
   overflow: hidden;
@@ -33,9 +31,20 @@ const LayoutContainer = styled.div`
   justify-content: space-between;
 `
 
+export const Route = createRootRoute({
+  beforeLoad: ({ location }) => {
+    const isAnonUser = !existToken()
+
+    authGuard(location, isAnonUser)
+  },
+  component: () => <Layout />,
+})
+
 function Layout() {
   const { isAuth, changeIsAuth } = useGlobalContext()
-  changeIsAuth(existToken())
+  useEffect(() => {
+    changeIsAuth(existToken())
+  })
 
   return (
     <LayoutContainer>

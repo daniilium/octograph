@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from '@tanstack/react-router'
 
-import { removeToken } from '@/entities/auth-token'
+import { removeToken } from '@/features/auth-token'
 
 import { useGlobalContext } from '@/shared/model/GlobalContext'
 import { useLocalStorage } from '@/shared/lib/useLocalStorage'

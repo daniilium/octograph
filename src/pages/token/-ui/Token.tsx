@@ -8,7 +8,7 @@ import { Header, Modal } from '@/shared/ui/organisms'
 import { Stack } from '@/shared/ui/templates'
 
 import { revokeToken } from '../-api/revokeToken'
-import { getToken } from '@/entities/auth-token'
+import { getToken } from '@/features/auth-token'
 
 export function Token() {
   const copyToken = () => {

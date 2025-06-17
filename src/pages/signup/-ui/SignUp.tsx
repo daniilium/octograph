@@ -8,7 +8,7 @@ import { Stack } from '@/shared/ui/templates'
 import { useGlobalContext } from '@/shared/model/GlobalContext'
 
 import { useSignUp } from '../-model/useSignUp'
-import { setToken } from '@/entities/auth-token'
+import { setToken } from '@/features/auth-token'
 import { useEffect } from 'react'
 
 type SignUpForm = {

@@ -1,6 +1,4 @@
-import { ProfileForm } from '@/shared/model/types'
-
-import { editAccountInfo } from '../-api/editAccountInfo'
+import { editAccountInfo, ProfileForm } from '../-api/editAccountInfo'
 
 export type EditAccountInfoActionPayload = {
   token: string

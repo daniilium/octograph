@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { getToken } from '@/entities/auth-token'
+import { getToken } from '@/features/auth-token'
 
 import { ProfileForm } from '@/shared/model/types'
-import { Button, InfoPin, Link, MainText } from '@/shared/ui/atoms'
+import { Button, InfoPin, Link } from '@/shared/ui/atoms'
 import { FormTextField } from '@/shared/ui/molecules'
 import { Header } from '@/shared/ui/organisms'
 import { Stack } from '@/shared/ui/templates'
@@ -15,14 +15,12 @@ import { convertDtoUser } from '../-model/convertDtoUser'
 import { useEditAccountInfo } from '../-model/useChangeAccountData'
 
 export function Profile() {
-  const [user, setUser] = useState<ProfileForm>()
   const [authUrl, setAuthUrl] = useState<string>()
-  const [change, setChange] = useState<boolean>(false)
 
   const {
     handleSubmit,
     control,
-    formState: { errors, dirtyFields },
+    formState: { errors },
     setValue,
   } = useForm<ProfileForm>()
 
@@ -48,10 +46,8 @@ export function Profile() {
 
     // устанавливаем данные
     if (isSuccess && account?.ok) {
-      const newUserData = convertDtoUser(account)
-      setUser(newUserData)
       setAuthUrl(account.result.auth_url)
-      setValues(newUserData)
+      setValues(convertDtoUser(account))
     }
 
     // обрабатываем ошибку
@@ -72,9 +68,7 @@ export function Profile() {
   useEffect(() => {
     // устанавливаем изменённые данные
     if (isSuccessEdit && accountEdit?.ok) {
-      const newUserData = convertDtoUser(accountEdit)
-      setUser(newUserData)
-      setValues(newUserData)
+      setValues(convertDtoUser(accountEdit))
     }
 
     // обрабатываем ошибку
@@ -147,7 +141,7 @@ export function Profile() {
             </Stack>
 
             <Stack align="left">
-              <Button onClick={() => setChange(true)}>Change user data</Button>
+              <Button type="submit">Change user data</Button>
             </Stack>
           </Stack>
         </form>
