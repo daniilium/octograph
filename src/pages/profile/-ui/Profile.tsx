@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form'
 
 import { getToken } from '@/features/auth-token'
 
-import { ProfileForm } from '@/shared/model/types'
 import { Button, InfoPin, Link } from '@/shared/ui/atoms'
 import { FormTextField } from '@/shared/ui/molecules'
 import { Header } from '@/shared/ui/organisms'
@@ -13,6 +12,7 @@ import { useGetAccountByToken } from '@/shared/model/useGetAccountByToken'
 import { profileFormRules } from '../-model/profileFormRules'
 import { convertDtoUser } from '../-model/convertDtoUser'
 import { useEditAccountInfo } from '../-model/useChangeAccountData'
+import { ProfileForm } from '../-api/editAccountInfo'
 
 export function Profile() {
   const [authUrl, setAuthUrl] = useState<string>()
