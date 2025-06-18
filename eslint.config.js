@@ -30,6 +30,8 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       '@typescript-eslint/no-unused-vars': 'warn',
+      'react-hooks/exhaustive-deps': 'off',
+      'prettier/prettier': 'warn',
     },
   }
 )
