@@ -3,13 +3,13 @@ import { useNavigate } from '@tanstack/react-router'
 
 import { Button, FormContainer, Link, InfoPin } from '@/shared/ui/atoms'
 import { FormTextField } from '@/shared/ui/molecules'
-import { Header } from '@/shared/ui/organisms'
+
 import { Stack } from '@/shared/ui/templates'
-import { useGlobalContext } from '@/shared/model/GlobalContext'
 
 import { useSignUp } from '../-model/useSignUp'
 import { setToken } from '@/features/auth-token'
 import { useEffect } from 'react'
+import { useGlobalContext } from '@/shared/model/global-context'
 
 type SignUpForm = {
   shortName: string
@@ -25,7 +25,14 @@ const rules = {
 
 export function SignUp() {
   const navigate = useNavigate()
-  const { changeIsAuth } = useGlobalContext()
+  const { changeIsAuth, setHeader } = useGlobalContext()
+
+  useEffect(() => {
+    setHeader({
+      title: 'Sign up',
+      subtitle: 'create new token',
+    })
+  }, [])
 
   const {
     data: account,
@@ -60,27 +67,23 @@ export function SignUp() {
   }, [isSuccess, isError, account, error, changeIsAuth, navigate, setError])
 
   return (
-    <>
-      <Header title="Sign up" subtitle="create new token" />
+    <FormContainer onSubmit={handleSubmit(onSubmit)}>
+      <Stack gap="8">
+        <FormTextField
+          name="shortName"
+          placeholder="short name"
+          control={control}
+          rules={rules.shortName}
+          error={errors?.shortName}
+        />
 
-      <FormContainer onSubmit={handleSubmit(onSubmit)}>
-        <Stack gap="8">
-          <FormTextField
-            name="shortName"
-            placeholder="short name"
-            control={control}
-            rules={rules.shortName}
-            error={errors?.shortName}
-          />
+        <InfoPin>can be changed later</InfoPin>
+      </Stack>
 
-          <InfoPin>can be changed later</InfoPin>
-        </Stack>
-
-        <Stack direction="column" align="center" gap="8px">
-          <Button disabled={isPending}>Create token</Button>
-          <Link to="/login">or sign in</Link>
-        </Stack>
-      </FormContainer>
-    </>
+      <Stack direction="column" align="center" gap="8px">
+        <Button disabled={isPending}>Create token</Button>
+        <Link to="/login">or sign in</Link>
+      </Stack>
+    </FormContainer>
   )
 }

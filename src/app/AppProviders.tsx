@@ -1,4 +1,4 @@
-import { GlobalContextProvider } from '@/shared/model/GlobalContext'
+import { GlobalContextProvider } from '@/shared/model/global-context'
 
 type AppProvidersProps = {
   children: React.ReactNode

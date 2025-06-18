@@ -1,13 +1,13 @@
-import { Nav } from '@/shared/ui/organisms/Nav'
-
 import { createRootRoute, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
 import styled from 'styled-components'
-import { useGlobalContext } from '@/shared/model/GlobalContext'
 import { existToken } from '@/features/auth-token'
 import { authGuard } from '@/features/auth-guard/lib/authGuard'
 import { useEffect } from 'react'
+import { Navigation } from '@/widgets/Navigation'
+import { Header } from '@/widgets/Header'
+import { useGlobalContext } from '@/shared/model/global-context'
 
 const ContentContainer = styled.div`
   overflow: hidden;
@@ -49,12 +49,13 @@ function Layout() {
   return (
     <LayoutContainer>
       <ContentContainer>
+        <Header />
         {/* <Outlet context={{ GlobalStore, setGlobalStore }} /> */}
         <Outlet />
         {/* <TanStackRouterDevtools /> */}
       </ContentContainer>
 
-      <Nav isAuth={isAuth} />
+      <Navigation isAuth={isAuth} />
     </LayoutContainer>
   )
 }

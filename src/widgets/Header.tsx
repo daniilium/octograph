@@ -1,11 +1,8 @@
+import { useGlobalContext } from '@/shared/model/global-context'
 import { Title, Subtitle } from '@/shared/ui/atoms'
 
-interface Props {
-  title: string
-  subtitle: string
-}
-export const Header = (props: Props) => {
-  const { title, subtitle } = props
+export const Header = () => {
+  const { title, subtitle } = useGlobalContext()
 
   return (
     <header>

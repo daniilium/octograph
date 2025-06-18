@@ -1,26 +1,32 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from '@tanstack/react-router'
 
-import { useGlobalContext } from '@/shared/model/GlobalContext'
-
 import { Button, FormContainer, InfoPin, Link } from '@/shared/ui/atoms'
 import { FormTextField } from '@/shared/ui/molecules'
-import { Header } from '@/shared/ui/organisms'
 import { Stack } from '@/shared/ui/templates'
-
-import { useEffect } from 'react'
 import { setToken } from '@/features/auth-token'
-import { loginFormRules } from '../-model/loginFormRules'
 import { useGetAccountByToken } from '@/shared/model/useGetAccountByToken'
+
+import { loginFormRules } from '../-model/loginFormRules'
+import { useGlobalContext } from '@/shared/model/global-context'
 
 interface LoginForm {
   token: string
 }
 
 export function Login() {
+  const { changeIsAuth, setHeader } = useGlobalContext()
+
+  useEffect(() => {
+    setHeader({
+      title: 'Login',
+      subtitle: 'management telegra.ph',
+    })
+  }, [])
+
   // Сценарий: нет токена
   const navigate = useNavigate()
-  const { changeIsAuth } = useGlobalContext()
 
   const {
     data: account,
@@ -70,8 +76,6 @@ export function Login() {
 
   return (
     <>
-      <Header title="Login" subtitle="sign in" />
-
       <FormContainer onSubmit={handleSubmit(onSubmit)}>
         <Stack gap="8">
           <FormTextField

@@ -17,7 +17,7 @@ type NavProps = {
   isAuth: boolean
 }
 
-export const Nav = (props: NavProps) => {
+export const Navigation = (props: NavProps) => {
   const { isAuth } = props
 
   return (

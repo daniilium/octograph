@@ -1,16 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import CopyIcon from '/copy.svg'
 import RevokeIcon from '/assets/revoke.svg'
 
 import { InfoPin, ButtonAsLink } from '@/shared/ui/atoms'
-import { Header, Modal } from '@/shared/ui/organisms'
+
 import { Stack } from '@/shared/ui/templates'
 
 import { revokeToken } from '../-api/revokeToken'
 import { getToken } from '@/features/auth-token'
+import { useGlobalContext } from '@/shared/model/global-context'
+import { Modal } from '@/shared/ui/organisms/Modal'
 
 export function Token() {
+  const { setHeader } = useGlobalContext()
+
+  useEffect(() => {
+    setHeader({
+      title: 'Warning',
+      subtitle: 'Management token',
+    })
+  }, [])
+
   const copyToken = () => {
     const token = getToken()
 
@@ -28,60 +39,56 @@ export function Token() {
   const [isOpenModal, setIsOpenModal] = useState(false)
 
   return (
-    <>
-      <Header title="Warning" subtitle="Management token" />
-
-      <Stack gap="16px">
-        <Stack>
-          <ButtonAsLink onClick={copyToken}>
-            <img
-              style={{ width: '16px', height: '16px' }}
-              src={CopyIcon}
-              alt="Copy Icon"
-            />
-            Copy token
-          </ButtonAsLink>
-          <InfoPin>
-            transferring the token to third parties may result in the loss of
-            account management
-          </InfoPin>
-        </Stack>
-
-        <Stack>
-          <ButtonAsLink onClick={copyLink}>
-            <img
-              style={{ width: '16px', height: '16px' }}
-              src={CopyIcon}
-              alt="Copy Icon"
-            />
-            Copy the login link
-          </ButtonAsLink>
-          <InfoPin>contains a token in the link</InfoPin>
-        </Stack>
-
-        <Stack>
-          <ButtonAsLink onClick={() => setIsOpenModal(true)}>
-            <img
-              style={{ width: '16px', height: '16px' }}
-              src={RevokeIcon}
-              alt="Revoke Icon"
-            />
-            Revoke token
-          </ButtonAsLink>
-          <InfoPin>old tokens and links will stop working</InfoPin>
-        </Stack>
-
-        {isOpenModal && (
-          <Modal
-            setIsOpen={setIsOpenModal}
-            title={'Revoke token?'}
-            text={
-              "Are you sure you want to revoke the token? This will change the token to a new one, so the login links will change. Don't forget to save the new token."
-            }
-            onClick={revokeToken}
+    <Stack gap="16px">
+      <Stack>
+        <ButtonAsLink onClick={copyToken}>
+          <img
+            style={{ width: '16px', height: '16px' }}
+            src={CopyIcon}
+            alt="Copy Icon"
           />
-        )}
+          Copy token
+        </ButtonAsLink>
+        <InfoPin>
+          transferring the token to third parties may result in the loss of
+          account management
+        </InfoPin>
       </Stack>
-    </>
+
+      <Stack>
+        <ButtonAsLink onClick={copyLink}>
+          <img
+            style={{ width: '16px', height: '16px' }}
+            src={CopyIcon}
+            alt="Copy Icon"
+          />
+          Copy the login link
+        </ButtonAsLink>
+        <InfoPin>contains a token in the link</InfoPin>
+      </Stack>
+
+      <Stack>
+        <ButtonAsLink onClick={() => setIsOpenModal(true)}>
+          <img
+            style={{ width: '16px', height: '16px' }}
+            src={RevokeIcon}
+            alt="Revoke Icon"
+          />
+          Revoke token
+        </ButtonAsLink>
+        <InfoPin>old tokens and links will stop working</InfoPin>
+      </Stack>
+
+      {isOpenModal && (
+        <Modal
+          setIsOpen={setIsOpenModal}
+          title={'Revoke token?'}
+          text={
+            "Are you sure you want to revoke the token? This will change the token to a new one, so the login links will change. Don't forget to save the new token."
+          }
+          onClick={revokeToken}
+        />
+      )}
+    </Stack>
   )
 }

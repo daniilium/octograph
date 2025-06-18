@@ -1,15 +1,23 @@
-import { Header } from '@/shared/ui/organisms'
+import { useGlobalContext } from '@/shared/model/global-context'
 import { MainText } from '@/shared/ui/atoms'
+import { useEffect } from 'react'
 
 export const Route = createFileRoute({
   component: Index,
 })
 
 function Index() {
+  const { setHeader } = useGlobalContext()
+
+  useEffect(() => {
+    setHeader({
+      title: 'Home',
+      subtitle: 'management telegra.ph',
+    })
+  }, [])
+
   return (
     <>
-      <Header title="Home" subtitle="management telegra.ph" />
-
       <article>
         <MainText>Site functionality:</MainText>
         <MainText>• Changing account data</MainText>
