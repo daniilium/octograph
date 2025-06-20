@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { Stack } from '@/shared/ui/templates/Stack'
+import { Stack } from '@/shared/ui/templates/stack'
 
 interface ChildrenProps {
   children: ReactNode

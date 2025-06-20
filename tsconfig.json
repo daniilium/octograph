@@ -29,6 +29,6 @@
     /* Temp */
     "noImplicitAny": true
   },
-  "include": ["src"],
+  "include": ["src", "routes/login/$token.tsx", "routes/index.tsx", "routes/__root.tsx", "routes/logout/index.tsx", "routes/page/$pageId.tsx", "routes/pages/index.tsx", "routes/profile/index.tsx", "routes/signup/index.tsx", "routes/token/index.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

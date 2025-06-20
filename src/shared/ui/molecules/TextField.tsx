@@ -1,7 +1,7 @@
 import { FieldError, RefCallBack } from 'react-hook-form'
 
 import { Label } from '@/shared/ui/atoms/Label'
-import { Stack } from '@/shared/ui/templates/Stack'
+import { Stack } from '@/shared/ui/templates/stack'
 import { Input } from './input'
 import { ChangeEvent } from 'react'
 

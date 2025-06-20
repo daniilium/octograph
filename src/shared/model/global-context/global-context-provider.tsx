@@ -7,12 +7,16 @@ export function GlobalContextProvider({
 }: {
   children: React.ReactNode
 }) {
-  const [isAuth, setIsAuth] = useState(false)
+  const [isAuthenticated, setAuthenticated] = useState(false)
   const [{ title, subtitle }, setHeader] = useState({ title: '', subtitle: '' })
 
-  const changeIsAuth = useCallback((isAuth: boolean) => setIsAuth(isAuth), [])
-
-  const value = { isAuth, changeIsAuth, title, subtitle, setHeader }
+  const value = {
+    isAuthenticated,
+    setAuthenticated,
+    title,
+    subtitle,
+    setHeader,
+  }
 
   return (
     <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>

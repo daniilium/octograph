@@ -6,7 +6,7 @@ import {
 } from 'react-hook-form'
 
 import { Label } from '@/shared/ui/atoms/Label'
-import { Stack } from '@/shared/ui/templates/Stack'
+import { Stack } from '@/shared/ui/templates/stack'
 import { ErrorPin } from '@/shared/ui/atoms/ErrorPin'
 import { Input } from '@/shared/ui/molecules/input'
 

@@ -1,7 +1,7 @@
 import { Button } from '@/shared/ui/atoms/Button'
 import { MainText } from '@/shared/ui/atoms/MainText'
 import { Title } from '@/shared/ui/atoms/Title'
-import { Stack } from '@/shared/ui/templates/Stack'
+import { Stack } from '@/shared/ui/templates/stack'
 
 import { CloseButton } from './close-button'
 import { Group } from './group'

@@ -1,8 +1,8 @@
 import { createContext } from 'react'
 
 export interface GlobalContextState {
-  isAuth: boolean
-  changeIsAuth: (isAuth: boolean) => void
+  isAuthenticated: boolean
+  setAuthenticated: (value: boolean) => void
 
   title: string
   subtitle: string
