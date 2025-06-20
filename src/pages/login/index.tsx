@@ -1,5 +1,5 @@
-import { Login } from './-ui/Login'
+import { LoginPage } from './-ui/login-page'
 
 export const Route = createFileRoute({
-  component: Login,
+  component: LoginPage,
 })

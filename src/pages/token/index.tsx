@@ -1,5 +1,5 @@
-import { Token } from './-ui/Token'
+import { TokenPage } from './-ui/token-page'
 
 export const Route = createFileRoute({
-  component: Token,
+  component: TokenPage,
 })

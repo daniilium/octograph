@@ -1,9 +1,13 @@
 import { API_URL } from '@/shared/config/constants'
 import { AccountInfo, ErrorMessage } from '@/shared/model/types'
 
-export const getAccountByToken = async (
+type GetAccountByTokenPayload = {
   token: string
-): Promise<AccountInfo | ErrorMessage> => {
+}
+
+export const getAccountByToken = async ({
+  token,
+}: GetAccountByTokenPayload): Promise<AccountInfo | ErrorMessage> => {
   const response = await fetch(
     `${API_URL}/getAccountInfo?access_token=${token}&fields=["short_name","author_name","author_url","auth_url","page_count"]`,
     {

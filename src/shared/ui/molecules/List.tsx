@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 
-import { MainText } from '@/shared/ui/atoms'
-import { Stack } from '@/shared/ui/templates'
+import { Stack } from '@/shared/ui/templates/Stack'
 
 interface ChildrenProps {
   children: ReactNode
@@ -9,10 +8,4 @@ interface ChildrenProps {
 
 export const List = ({ children }: ChildrenProps) => {
   return <Stack>{children}</Stack>
-}
-
-export const ListItem = ({ children }: ChildrenProps) => {
-  return (
-    <MainText style={{ paddingLeft: 16, fontSize: 14 }}>{children}</MainText>
-  )
 }

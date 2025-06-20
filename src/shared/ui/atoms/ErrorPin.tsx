@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { colors } from '@/shared/config/theme'
 
-import { InfoPin } from '@/shared/ui/atoms'
+import { InfoPin } from './InfoPin'
 
 export const ErrorPin = styled(InfoPin)`
   color: ${colors.red};

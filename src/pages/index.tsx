@@ -1,12 +1,13 @@
 import { useGlobalContext } from '@/shared/model/global-context'
-import { MainText } from '@/shared/ui/atoms'
+import { MainText } from '@/shared/ui/atoms/MainText'
+
 import { useEffect } from 'react'
 
 export const Route = createFileRoute({
-  component: Index,
+  component: IndexPage,
 })
 
-function Index() {
+function IndexPage() {
   const { setHeader } = useGlobalContext()
 
   useEffect(() => {

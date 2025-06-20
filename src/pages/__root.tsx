@@ -1,35 +1,16 @@
+import { useEffect } from 'react'
 import { createRootRoute, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 
-import styled from 'styled-components'
 import { existToken } from '@/features/auth-token'
-import { authGuard } from '@/features/auth-guard/lib/authGuard'
-import { useEffect } from 'react'
-import { Navigation } from '@/widgets/Navigation'
-import { Header } from '@/widgets/Header'
+import { authGuard } from '@/features/auth-guard'
+
+import { Navigation } from '@/widgets/navigation'
+import { Header } from '@/widgets/header'
+
 import { useGlobalContext } from '@/shared/model/global-context'
-
-const ContentContainer = styled.div`
-  overflow: hidden;
-  flex-grow: 1;
-
-  padding: 21px;
-  width: 100%;
-  min-height: 100%;
-  max-width: 730px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`
-
-const LayoutContainer = styled.div`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`
+import { ContentContainer } from '@/shared/ui/templates/content-container'
+import { LayoutContainer } from '@/shared/ui/templates/layout-container'
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => {
@@ -37,10 +18,10 @@ export const Route = createRootRoute({
 
     authGuard(location, isAnonUser)
   },
-  component: () => <Layout />,
+  component: LayoutRoot,
 })
 
-function Layout() {
+function LayoutRoot() {
   const { isAuth, changeIsAuth } = useGlobalContext()
   useEffect(() => {
     changeIsAuth(existToken())
@@ -50,12 +31,13 @@ function Layout() {
     <LayoutContainer>
       <ContentContainer>
         <Header />
-        {/* <Outlet context={{ GlobalStore, setGlobalStore }} /> */}
+
         <Outlet />
-        {/* <TanStackRouterDevtools /> */}
       </ContentContainer>
 
       <Navigation isAuth={isAuth} />
+
+      <TanStackRouterDevtools />
     </LayoutContainer>
   )
 }

@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
 
-import { Button, Link, MainText } from '@/shared/ui/atoms'
-import { Stack } from '@/shared/ui/templates'
-
 import { useParams } from '@tanstack/react-router'
 
-import { useGetPage } from '../-model/useGetPage'
-import { useCleanupPage } from '../-model/useCleanupPage'
+import { useGetPage } from '../-model/use-get-page'
+
 import { Page as PageType } from '@/shared/model/types'
-import { getToken } from '@/features/auth-token'
-import { Modal } from '@/shared/ui/organisms/Modal'
+
 import { useGlobalContext } from '@/shared/model/global-context'
+import { MainText } from '@/shared/ui/atoms/MainText'
+import { Stack } from '@/shared/ui/templates/Stack'
+import { Link } from '@/shared/ui/atoms/Link'
+import { ClearPage } from './clear-page'
 
 const initialState: PageType = {
   title: 'Page',
@@ -46,27 +46,6 @@ export function Page() {
     }
   }, [pageId, data])
 
-  const [isOpenConfirmation, setIsOpenConfirmation] = useState(false)
-  const { data: emptyPage, actionCallback: setClearPage } = useCleanupPage()
-
-  const handleClearPage = () => {
-    const token = getToken()
-    if (!token) {
-      console.error('no token')
-      return
-    }
-
-    setClearPage({ path: pageId, token })
-    setIsOpenConfirmation(false)
-  }
-
-  useEffect(() => {
-    if (emptyPage) {
-      setPage(emptyPage.result)
-      setIsOpenConfirmation(false)
-    }
-  }, [emptyPage])
-
   return (
     <Stack gap="8px">
       <MainText>
@@ -85,22 +64,7 @@ export function Page() {
         Open this page in a new window
       </Link>
 
-      <Stack align="left">
-        <Button onClick={() => setIsOpenConfirmation(true)}>
-          Clear this page
-        </Button>
-      </Stack>
-
-      {isOpenConfirmation && (
-        <Modal
-          setIsOpen={setIsOpenConfirmation}
-          title={'Clear page?'}
-          text={
-            'Clearing the page will result in the loss of data on the page. It will not be possible to undo the action.'
-          }
-          onClick={handleClearPage}
-        />
-      )}
+      <ClearPage pageId={pageId} setPage={setPage} />
     </Stack>
   )
 }

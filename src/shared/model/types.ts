@@ -1,4 +1,4 @@
-type GoodAnswerWrapper<T> = {
+export type GoodAnswerWrapper<T> = {
   ok: true
   result: T
 }
@@ -8,7 +8,7 @@ export type ErrorMessage = {
   error: string
 }
 
-type Account = {
+export type Account = {
   short_name: string
   author_name: string
   author_url: string
@@ -40,3 +40,8 @@ type PageList = {
   total_count: number
   pages: Page[]
 }
+
+export type RevokeToken = GoodAnswerWrapper<{
+  access_token: string
+  auth_url: string
+}>

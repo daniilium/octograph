@@ -1,5 +1,5 @@
-import { SignUp } from './-ui/SignUp'
+import { SignUpPage } from './-ui/sign-up-page'
 
 export const Route = createFileRoute({
-  component: SignUp,
+  component: SignUpPage,
 })

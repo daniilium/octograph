@@ -1,31 +1,17 @@
 import { FieldError, RefCallBack } from 'react-hook-form'
-import styled from 'styled-components'
 
-import { colors, fonts } from '@/shared/config/theme'
-import { Label } from '../atoms'
-import { Stack } from '../templates'
-
-const Input = styled.input<{ error: boolean }>`
-  border: 1px solid ${(props) => (props.error ? colors.red : colors.black)};
-  border-radius: 18px;
-  font-family: ${fonts.main};
-  font-size: 18px;
-  padding: 0 12px;
-  height: 36px;
-
-  &:focus {
-    border: 2px solid ${(props) => (props.error ? colors.red : colors.black)};
-    outline: none;
-  }
-`
+import { Label } from '@/shared/ui/atoms/Label'
+import { Stack } from '@/shared/ui/templates/Stack'
+import { Input } from './input'
+import { ChangeEvent } from 'react'
 
 type Props = {
   label?: string
   placeholder?: string
-  onChange?(value: any): void
+  onChange?(value: string): void
   onBlur?(): void
   inputRef?: RefCallBack
-  // initValue?: string;
+
   value?: string
   error?: FieldError | undefined
 }
@@ -33,18 +19,22 @@ type Props = {
 export const TextField = (props: Props) => {
   const { label, placeholder, onChange, onBlur, inputRef, error } = props
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e.target.value)
+  }
+
   return (
     <Label>
       <Stack>
         {label}
+
         <Input
           type="text"
           placeholder={placeholder}
           ref={inputRef}
-          onChange={onChange}
-          // value={value}
+          onChange={handleChange}
           onBlur={onBlur}
-          error={Boolean(error)}
+          error={error}
         />
       </Stack>
     </Label>

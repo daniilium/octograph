@@ -1,5 +1,5 @@
-import { PageList } from './-ui/PageList'
+import { PagesPage } from './-ui/pages-page'
 
 export const Route = createFileRoute({
-  component: PageList,
+  component: PagesPage,
 })

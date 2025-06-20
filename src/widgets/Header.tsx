@@ -1,5 +1,6 @@
 import { useGlobalContext } from '@/shared/model/global-context'
-import { Title, Subtitle } from '@/shared/ui/atoms'
+import { Subtitle } from '@/shared/ui/atoms/Subtitle'
+import { Title } from '@/shared/ui/atoms/Title'
 
 export const Header = () => {
   const { title, subtitle } = useGlobalContext()

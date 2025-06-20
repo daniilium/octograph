@@ -8,9 +8,9 @@ import {
 
 import { useLocalStorage } from '@/shared/lib/useLocalStorage'
 import { GetPageList } from '@/shared/model/types'
-import { handleAction } from '@/shared/lib/handleAction'
+import { createAction } from '@/shared/lib/use-resource'
 
-import { getPageList, GetPageListPayload } from '../-api/getPageList'
+import { getPageList, GetPageListPayload } from '../-api/get-page-list'
 import { getToken } from '@/features/auth-token'
 
 export type PageListState = {
@@ -19,13 +19,10 @@ export type PageListState = {
 }
 
 export function usePageListPagination(limit = 20) {
-  const action = useMemo(
-    () => handleAction<PageListState, GetPageListPayload>(getPageList),
-    []
-  )
+  const action = useMemo(() => createAction(getPageList), [])
   const [currentPage, setCurrentPage] = useLocalStorage('pageNumber', 1)
 
-  const [{ data, error }, runAction] = useActionState<
+  const [{ data, error }, dispatch] = useActionState<
     PageListState,
     GetPageListPayload
   >(action, { data: null, error: null })
@@ -49,12 +46,12 @@ export function usePageListPagination(limit = 20) {
       const token = getToken()
       if (!token) return
 
-      // Sequential number of the first page to be returned.
+      // offset is sequential number of the first page to be returned.
       const offset = (page - 1) * limit
 
-      startTransition(() => runAction({ offset, limit, token }))
+      startTransition(() => dispatch({ offset, limit, token }))
     },
-    [limit, runAction]
+    [limit, dispatch]
   )
 
   useEffect(() => {

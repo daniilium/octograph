@@ -1,5 +1,5 @@
-import { Profile } from './-ui/Profile'
+import { ProfilePage } from './-ui/profile-page'
 
 export const Route = createFileRoute({
-  component: Profile,
+  component: ProfilePage,
 })
