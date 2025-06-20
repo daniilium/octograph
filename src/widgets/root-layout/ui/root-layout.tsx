@@ -31,7 +31,7 @@ export function RootLayout({ Header, Navigation }: Props) {
 
       <Navigation />
 
-      <TanStackRouterDevtools />
+      {import.meta.env.DEV && <TanStackRouterDevtools position="top-right" />}
     </LayoutContainer>
   )
 }
