@@ -33,12 +33,16 @@ export function usePageListPagination(limit = 20) {
     pages: [],
   }
 
+  const canGoNext = currentPage < Math.ceil(totalCount / limit)
+  const canGoPrevious = currentPage > 1
+
   const nextPage = useCallback(() => {
+    if (!canGoNext) return
     setCurrentPage(currentPage + 1)
   }, [currentPage])
 
   const previousPage = useCallback(() => {
-    if (currentPage === 1) return
+    if (!canGoPrevious) return
     setCurrentPage(currentPage - 1)
   }, [currentPage])
 
