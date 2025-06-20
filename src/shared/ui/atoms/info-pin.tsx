@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 import { colors } from '@/shared/config/theme'
-import { MainText } from './MainText'
+import { MainText } from './main-text'
 
 export const InfoPin = styled(MainText)`
   position: relative;

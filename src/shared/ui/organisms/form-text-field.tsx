@@ -5,9 +5,9 @@ import {
   FieldValues,
 } from 'react-hook-form'
 
-import { Label } from '@/shared/ui/atoms/Label'
+import { Label } from '@/shared/ui/atoms/label'
 import { Stack } from '@/shared/ui/templates/stack'
-import { ErrorPin } from '@/shared/ui/atoms/ErrorPin'
+import { ErrorPin } from '@/shared/ui/atoms/error-pin'
 import { Input } from '@/shared/ui/molecules/input'
 
 type Props<T extends FieldValues> = {

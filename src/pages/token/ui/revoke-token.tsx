@@ -4,8 +4,8 @@ import { ModalDialog } from '@/shared/ui/organisms/modal-dialog'
 
 import RevokeIcon from '/assets/revoke.svg'
 import { Stack } from '@/shared/ui/templates/stack'
-import { ButtonAsLink } from '@/shared/ui/atoms/ButtonAsLink'
-import { InfoPin } from '@/shared/ui/atoms/InfoPin'
+import { ButtonAsLink } from '@/shared/ui/atoms/button-as-link'
+import { InfoPin } from '@/shared/ui/atoms/info-pin'
 import { useRevokeToken } from '../model/use-revoke-token'
 import { getToken, setToken } from '@/features/auth-token'
 

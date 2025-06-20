@@ -1,4 +1,4 @@
-import { Link } from '@/shared/ui/atoms/Link'
+import { Link } from '@/shared/ui/atoms/link'
 import { styled } from 'styled-components'
 
 export const PageLink = styled(Link)`

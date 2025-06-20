@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { useGlobalContext } from '@/shared/model/global-context'
-import { MainText } from '@/shared/ui/atoms/MainText'
+import { MainText } from '@/shared/ui/atoms/main-text'
 
 export function RootPage() {
   const { setHeader } = useGlobalContext()

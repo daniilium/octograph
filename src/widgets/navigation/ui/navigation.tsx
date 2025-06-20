@@ -1,4 +1,4 @@
-import { Link } from '@/shared/ui/atoms/Link'
+import { Link } from '@/shared/ui/atoms/link'
 
 import { NavContainer } from './nav-container'
 import { useGlobalContext } from '@/shared/model/global-context'

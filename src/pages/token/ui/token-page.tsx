@@ -3,8 +3,8 @@ import { useEffect } from 'react'
 import { getToken } from '@/features/auth-token'
 
 import { useGlobalContext } from '@/shared/model/global-context'
-import { ButtonAsLink } from '@/shared/ui/atoms/ButtonAsLink'
-import { InfoPin } from '@/shared/ui/atoms/InfoPin'
+import { ButtonAsLink } from '@/shared/ui/atoms/button-as-link'
+import { InfoPin } from '@/shared/ui/atoms/info-pin'
 import { Stack } from '@/shared/ui/templates/stack'
 
 import CopyIcon from '/copy.svg'

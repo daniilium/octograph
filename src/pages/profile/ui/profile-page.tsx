@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { Link } from '@/shared/ui/atoms/Link'
-import { InfoPin } from '@/shared/ui/atoms/InfoPin'
+import { Link } from '@/shared/ui/atoms/link'
+import { InfoPin } from '@/shared/ui/atoms/info-pin'
 import { Stack } from '@/shared/ui/templates/stack'
 
 import { ProfileForm } from './profile-form'

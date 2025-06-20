@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { getToken } from '@/features/auth-token'
 
 import { Page } from '@/shared/model/types'
-import { Button } from '@/shared/ui/atoms/Button'
+import { Button } from '@/shared/ui/atoms/button'
 import { ModalDialog } from '@/shared/ui/organisms/modal-dialog'
 import { Stack } from '@/shared/ui/templates/stack'
 

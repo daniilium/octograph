@@ -4,10 +4,10 @@ import { useForm } from 'react-hook-form'
 import { getToken } from '@/features/auth-token'
 
 import { FormTextField } from '@/shared/ui/organisms/form-text-field'
-import { Button } from '@/shared/ui/atoms/Button'
+import { Button } from '@/shared/ui/atoms/button'
 import { useGlobalContext } from '@/shared/model/global-context'
 import { Stack } from '@/shared/ui/templates/stack'
-import { InfoPin } from '@/shared/ui/atoms/InfoPin'
+import { InfoPin } from '@/shared/ui/atoms/info-pin'
 import { useGetAccountByToken } from '@/shared/model/use-get-account-by-token'
 
 import { profileFormRules } from '../model/profile-form-rules'

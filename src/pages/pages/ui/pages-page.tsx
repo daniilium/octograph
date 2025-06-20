@@ -4,8 +4,8 @@ import PageIcon from '/assets/page.svg'
 
 import { Page } from '@/shared/model/types'
 import { useGlobalContext } from '@/shared/model/global-context'
-import { ButtonAsLink } from '@/shared/ui/atoms/ButtonAsLink'
-import { MainText } from '@/shared/ui/atoms/MainText'
+import { ButtonAsLink } from '@/shared/ui/atoms/button-as-link'
+import { MainText } from '@/shared/ui/atoms/main-text'
 import { Stack } from '@/shared/ui/templates/stack'
 
 import { usePageListPagination } from '../model/use-page-list-pagination'

@@ -1,4 +1,4 @@
-import { MainText } from '../atoms/MainText'
+import { MainText } from '../atoms/main-text'
 
 export const ListItem = ({ children }: { children: React.ReactNode }) => {
   return (

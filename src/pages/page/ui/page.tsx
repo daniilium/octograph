@@ -7,9 +7,9 @@ import { useGetPage } from '../model/use-get-page'
 import { Page as PageType } from '@/shared/model/types'
 
 import { useGlobalContext } from '@/shared/model/global-context'
-import { MainText } from '@/shared/ui/atoms/MainText'
+import { MainText } from '@/shared/ui/atoms/main-text'
 import { Stack } from '@/shared/ui/templates/stack'
-import { Link } from '@/shared/ui/atoms/Link'
+import { Link } from '@/shared/ui/atoms/link'
 import { ClearPage } from './clear-page'
 
 const initialState: PageType = {

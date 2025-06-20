@@ -1,6 +1,6 @@
-import { Button } from '@/shared/ui/atoms/Button'
-import { MainText } from '@/shared/ui/atoms/MainText'
-import { Title } from '@/shared/ui/atoms/Title'
+import { Button } from '@/shared/ui/atoms/button'
+import { MainText } from '@/shared/ui/atoms/main-text'
+import { Title } from '@/shared/ui/atoms/title'
 import { Stack } from '@/shared/ui/templates/stack'
 
 import { CloseButton } from './close-button'
