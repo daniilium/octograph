@@ -7,6 +7,7 @@ import { Navigation } from '@/widgets/navigation'
 import { Header } from '@/widgets/header'
 
 import { RootLayout } from '@/widgets/root-layout'
+import RootErrorBoundary from '@/widgets/root-error-boundary'
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => {
@@ -14,5 +15,9 @@ export const Route = createRootRoute({
 
     authGuard(location, isAnonUser)
   },
-  component: () => <RootLayout Header={Header} Navigation={Navigation} />,
+  component: () => (
+    <RootErrorBoundary>
+      <RootLayout Header={Header} Navigation={Navigation} />,
+    </RootErrorBoundary>
+  ),
 })
